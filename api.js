@@ -2020,32 +2020,38 @@ const proxy = {
     },
     $body: {
       name: 'Serati Ma',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       email: 'antdesign@alipay.com',
       signature: '海纳百川，有容乃大',
       title: '交互专家',
       group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
-      tags: [{
-        key: '0',
-        label: '很有想法的',
-      }, {
-        key: '1',
-        label: '专注设计',
-      }, {
-        key: '2',
-        label: '辣~',
-      }, {
-        key: '3',
-        label: '大长腿',
-      }, {
-        key: '4',
-        label: '川妹子',
-      }, {
-        key: '5',
-        label: '海纳百川',
-      }],
+      tags: [
+        {
+          key: '0',
+          label: '很有想法的',
+        },
+        {
+          key: '1',
+          label: '专注设计',
+        },
+        {
+          key: '2',
+          label: '辣~',
+        },
+        {
+          key: '3',
+          label: '大长腿',
+        },
+        {
+          key: '4',
+          label: '川妹子',
+        },
+        {
+          key: '5',
+          label: '海纳百川',
+        },
+      ],
       notifyCount: 12,
       country: 'China',
       geographic: {
@@ -2172,6 +2178,7 @@ const proxy = {
   },
   'GET /api/geographic/province': __WEBPACK_IMPORTED_MODULE_7__mock_geographic_geographic__["b" /* getProvince */],
   'GET /api/geographic/city/:province': __WEBPACK_IMPORTED_MODULE_7__mock_geographic_geographic__["a" /* getCity */],
+  'GET /api/captcha': __WEBPACK_IMPORTED_MODULE_2__mock_api__["getFakeCaptcha"],
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (noProxy ? {} : Object(__WEBPACK_IMPORTED_MODULE_6_roadhog_api_doc__["delay"])(proxy, 1000));
@@ -9746,9 +9753,9 @@ module.exports = apply;
 
             mom = createUTC([2000, 1]).day(i);
             if (strict && !this._fullWeekdaysParse[i]) {
-                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
-                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
-                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$', 'i');
             }
             if (!this._weekdaysParse[i]) {
                 regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
@@ -10551,7 +10558,7 @@ module.exports = apply;
 
     function preprocessRFC2822(s) {
         // Remove comments and folding whitespace and replace multiple-spaces with a single space
-        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').trim();
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
 
     function checkWeekday(weekdayStr, parsedInput, config) {
@@ -12730,7 +12737,7 @@ module.exports = apply;
     // Side effect imports
 
 
-    hooks.version = '2.22.1';
+    hooks.version = '2.22.2';
 
     setHookCallback(createLocal);
 
