@@ -1718,18 +1718,22 @@ this.tinycolor = tinycolor;
 @grid-gutter-width      : 0;
 
 // Layout
-@layout-body-background      : #f0f2f5;
-@layout-header-background    : #001529;
-@layout-footer-background    : @layout-body-background;
-@layout-header-height        : 64px;
-@layout-header-padding       : 0 50px;
-@layout-footer-padding       : 24px 50px;
-@layout-sider-background     : @layout-header-background;
-@layout-trigger-height       : 48px;
-@layout-trigger-background   : #002140;
-@layout-trigger-color        : #fff;
-@layout-zero-trigger-width   : 36px;
-@layout-zero-trigger-height  : 42px;
+@layout-body-background         : #f0f2f5;
+@layout-header-background       : #001529;
+@layout-footer-background       : @layout-body-background;
+@layout-header-height           : 64px;
+@layout-header-padding          : 0 50px;
+@layout-footer-padding          : 24px 50px;
+@layout-sider-background        : @layout-header-background;
+@layout-trigger-height          : 48px;
+@layout-trigger-background      : #002140;
+@layout-trigger-color           : #fff;
+@layout-zero-trigger-width      : 36px;
+@layout-zero-trigger-height     : 42px;
+// Layout light theme
+@layout-sider-background-light  : #fff;
+@layout-trigger-background-light: #fff;
+@layout-trigger-color-light     : @text-color;
 
 // z-index list
 @zindex-affix           : 10;
@@ -1801,7 +1805,7 @@ this.tinycolor = tinycolor;
 //** Popover maximum width
 @popover-min-width: 177px;
 //** Popover arrow width
-@popover-arrow-width: 5px;
+@popover-arrow-width: 6px;
 //** Popover arrow color
 @popover-arrow-color: @popover-bg;
 //** Popover outer arrow width
@@ -4407,6 +4411,13 @@ form .ant-upload {
 .ant-layout-sider-zero-width-trigger:hover {
   background: #192c3e;
 }
+.ant-layout-sider-light {
+  background: #fff;
+}
+.ant-layout-sider-light > .ant-layout-sider-trigger {
+  color: rgba(0, 0, 0, 0.65);
+  background: #fff;
+}
 .ant-list {
   color: rgba(0, 0, 0, 0.65);
 }
@@ -5139,7 +5150,7 @@ form .ant-upload {
 .ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow,
 .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow,
 .ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
-  box-shadow: -1px -1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.06);
 }
 .ant-popover-placement-left > .ant-popover-content > .ant-popover-arrow,
 .ant-popover-placement-leftTop > .ant-popover-content > .ant-popover-arrow,

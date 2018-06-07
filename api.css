@@ -3081,7 +3081,7 @@ mark {
 .ant-modal-open {
   overflow: hidden;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .ant-modal {
     width: auto !important;
     margin: 10px;

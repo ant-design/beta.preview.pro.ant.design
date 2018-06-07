@@ -25321,6 +25321,18 @@ KeyCode.isCharacterKey = function isCharacterKey(keyCode) {
 };
 
 /* harmony default export */ var es_KeyCode = (KeyCode);
+// CONCATENATED MODULE: ../node_modules/rc-util/es/Dom/contains.js
+function contains(root, n) {
+  var node = n;
+  while (node) {
+    if (node === root) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+
+  return false;
+}
 // EXTERNAL MODULE: ../node_modules/babel-runtime/helpers/defineProperty.js
 var defineProperty = __webpack_require__("Xos8");
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
@@ -26273,6 +26285,7 @@ function getScrollBarSize(fresh) {
 
 
 
+
 var uuid = 0;
 var openCount = 0;
 /* eslint react/no-is-mounted:0 */
@@ -26513,9 +26526,8 @@ var Dialog_Dialog = function (_React$Component) {
             // first show
             if (!prevProps.visible) {
                 this.openTime = Date.now();
-                this.lastOutSideFocusNode = document.activeElement;
                 this.addScrollingEffect();
-                this.wrap.focus();
+                this.tryFocus();
                 var dialogNode = react_dom["findDOMNode"](this.dialog);
                 if (mousePosition) {
                     var elOffset = Dialog_offset(dialogNode);
@@ -26540,6 +26552,13 @@ var Dialog_Dialog = function (_React$Component) {
     Dialog.prototype.componentWillUnmount = function componentWillUnmount() {
         if (this.props.visible || this.inTransition) {
             this.removeScrollingEffect();
+        }
+    };
+
+    Dialog.prototype.tryFocus = function tryFocus() {
+        if (!contains(this.wrap, document.activeElement)) {
+            this.lastOutSideFocusNode = document.activeElement;
+            this.wrap.focus();
         }
     };
 
@@ -26769,12 +26788,20 @@ var DialogWrap_DialogWrap = function (_React$Component) {
 
             return react["createElement"](es_Dialog, extends_default()({ ref: _this.saveDialog }, _this.props, extra, { key: "dialog" }));
         };
+        // fix issue #10656
+        /*
+        * Custom container should not be return, because in the Portal component, it will remove the
+        * return container element here, if the custom container is the only child of it's component,
+        * like issue #10656, It will has a conflict with removeChild method in react-dom.
+        * So here should add a child (div element) to custom container.
+        * */
         _this.getContainer = function () {
-            if (_this.props.getContainer) {
-                return _this.props.getContainer();
-            }
             var container = document.createElement('div');
-            document.body.appendChild(container);
+            if (_this.props.getContainer) {
+                _this.props.getContainer().appendChild(container);
+            } else {
+                document.body.appendChild(container);
+            }
             return container;
         };
         return _this;
@@ -33886,18 +33913,6 @@ var Menu__initialiseProps = function _initialiseProps() {
 };
 
 /* harmony default export */ var es_Menu = (Menu_Menu);
-// CONCATENATED MODULE: ../node_modules/rc-util/es/Dom/contains.js
-function contains(root, n) {
-  var node = n;
-  while (node) {
-    if (node === root) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-
-  return false;
-}
 // CONCATENATED MODULE: ../node_modules/dom-align/es/propertyUtils.js
 var vendorPrefix = void 0;
 
@@ -34843,12 +34858,11 @@ function getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset) {
 }
 
 /* harmony default export */ var es_getElFuturePos = (getElFuturePos);
-// CONCATENATED MODULE: ../node_modules/dom-align/es/index.js
+// CONCATENATED MODULE: ../node_modules/dom-align/es/align/align.js
 /**
  * align dom node flexibly
  * @author yiminghe@gmail.com
  */
-
 
 
 
@@ -34872,13 +34886,6 @@ function isCompleteFailX(elFuturePos, elRegion, visibleRect) {
 
 function isCompleteFailY(elFuturePos, elRegion, visibleRect) {
   return elFuturePos.top > visibleRect.bottom || elFuturePos.top + elRegion.height < visibleRect.top;
-}
-
-function isOutOfVisibleRect(target) {
-  var visibleRect = es_getVisibleRectForElement(target);
-  var targetRegion = es_getRegion(target);
-
-  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
 }
 
 function flip(points, reg, map) {
@@ -34911,12 +34918,16 @@ function normalizeOffset(offset, el) {
   offset[1] = convertOffset(offset[1], el.height);
 }
 
-function domAlign(el, refNode, align) {
+/**
+ * @param el
+ * @param tgtRegion 参照节点所占的区域: { left, top, width, height }
+ * @param align
+ */
+function doAlign(el, tgtRegion, align, isTgtRegionVisible) {
   var points = align.points;
   var offset = align.offset || [0, 0];
   var targetOffset = align.targetOffset || [0, 0];
   var overflow = align.overflow;
-  var target = align.target || refNode;
   var source = align.source || el;
   offset = [].concat(offset);
   targetOffset = [].concat(targetOffset);
@@ -34927,20 +34938,16 @@ function domAlign(el, refNode, align) {
   var visibleRect = es_getVisibleRectForElement(source);
   // 当前节点所占的区域, left/top/width/height
   var elRegion = es_getRegion(source);
-  // 参照节点所占的区域, left/top/width/height
-  var refNodeRegion = es_getRegion(target);
   // 将 offset 转换成数值，支持百分比
   normalizeOffset(offset, elRegion);
-  normalizeOffset(targetOffset, refNodeRegion);
+  normalizeOffset(targetOffset, tgtRegion);
   // 当前节点将要被放置的位置
-  var elFuturePos = es_getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset);
+  var elFuturePos = es_getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset);
   // 当前节点将要所处的区域
   var newElRegion = es_utils.merge(elRegion, elFuturePos);
 
-  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
-
   // 如果可视区域不能完全放置当前节点时允许调整
-  if (visibleRect && (overflow.adjustX || overflow.adjustY) && isTargetNotOutOfVisible) {
+  if (visibleRect && (overflow.adjustX || overflow.adjustY) && isTgtRegionVisible) {
     if (overflow.adjustX) {
       // 如果横向不能放下
       if (isFailX(elFuturePos, elRegion, visibleRect)) {
@@ -34952,7 +34959,7 @@ function domAlign(el, refNode, align) {
         // 偏移量也反下
         var newOffset = flipOffset(offset, 0);
         var newTargetOffset = flipOffset(targetOffset, 0);
-        var newElFuturePos = es_getElFuturePos(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
+        var newElFuturePos = es_getElFuturePos(elRegion, tgtRegion, newPoints, newOffset, newTargetOffset);
 
         if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
           fail = 1;
@@ -34974,7 +34981,7 @@ function domAlign(el, refNode, align) {
         // 偏移量也反下
         var _newOffset = flipOffset(offset, 1);
         var _newTargetOffset = flipOffset(targetOffset, 1);
-        var _newElFuturePos = es_getElFuturePos(elRegion, refNodeRegion, _newPoints, _newOffset, _newTargetOffset);
+        var _newElFuturePos = es_getElFuturePos(elRegion, tgtRegion, _newPoints, _newOffset, _newTargetOffset);
 
         if (!isCompleteFailY(_newElFuturePos, elRegion, visibleRect)) {
           fail = 1;
@@ -34987,7 +34994,7 @@ function domAlign(el, refNode, align) {
 
     // 如果失败，重新计算当前节点将要被放置的位置
     if (fail) {
-      elFuturePos = es_getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset);
+      elFuturePos = es_getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset);
       es_utils.mix(newElRegion, elFuturePos);
     }
     var isStillFailX = isFailX(elFuturePos, elRegion, visibleRect);
@@ -35038,11 +35045,7 @@ function domAlign(el, refNode, align) {
   };
 }
 
-domAlign.__getOffsetParent = es_getOffsetParent;
-
-domAlign.__getVisibleRectForElement = es_getVisibleRectForElement;
-
-/* harmony default export */ var dom_align_es = (domAlign);
+/* harmony default export */ var align_align = (doAlign);
 /**
  *  2012-04-26 yiminghe@gmail.com
  *   - 优化智能对齐算法
@@ -35051,24 +35054,92 @@ domAlign.__getVisibleRectForElement = es_getVisibleRectForElement;
  *  2011-07-13 yiminghe@gmail.com note:
  *   - 增加智能对齐，以及大小调整选项
  **/
-// CONCATENATED MODULE: ../node_modules/rc-align/es/isWindow.js
-function isWindow_isWindow(obj) {
-  /* eslint no-eq-null: 0 */
-  /* eslint eqeqeq: 0 */
-  return obj != null && obj == obj.window;
+// CONCATENATED MODULE: ../node_modules/dom-align/es/align/alignElement.js
+
+
+
+
+
+function isOutOfVisibleRect(target) {
+  var visibleRect = es_getVisibleRectForElement(target);
+  var targetRegion = es_getRegion(target);
+
+  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
 }
-// CONCATENATED MODULE: ../node_modules/rc-align/es/Align.js
+
+function alignElement(el, refNode, align) {
+  var target = align.target || refNode;
+  var refNodeRegion = es_getRegion(target);
+
+  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
+
+  return align_align(el, refNodeRegion, align, isTargetNotOutOfVisible);
+}
+
+alignElement.__getOffsetParent = es_getOffsetParent;
+
+alignElement.__getVisibleRectForElement = es_getVisibleRectForElement;
+
+/* harmony default export */ var align_alignElement = (alignElement);
+// CONCATENATED MODULE: ../node_modules/dom-align/es/align/alignPoint.js
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+/**
+ * `tgtPoint`: { pageX, pageY } or { clientX, clientY }.
+ * If client position provided, will internal convert to page position.
+ */
+
+function alignPoint_alignPoint(el, tgtPoint, align) {
+  var pageX = void 0;
+  var pageY = void 0;
+
+  var doc = es_utils.getDocument(el);
+  var win = doc.defaultView || doc.parentWindow;
+
+  var scrollX = es_utils.getWindowScrollLeft(win);
+  var scrollY = es_utils.getWindowScrollTop(win);
+  var viewportWidth = es_utils.viewportWidth(win);
+  var viewportHeight = es_utils.viewportHeight(win);
+
+  if ('pageX' in tgtPoint) {
+    pageX = tgtPoint.pageX;
+  } else {
+    pageX = scrollX + tgtPoint.clientX;
+  }
+
+  if ('pageY' in tgtPoint) {
+    pageY = tgtPoint.pageY;
+  } else {
+    pageY = scrollY + tgtPoint.clientY;
+  }
+
+  var tgtRegion = {
+    left: pageX,
+    top: pageY,
+    width: 0,
+    height: 0
+  };
+
+  var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight;
+
+  // Provide default target point
+  var points = [align.points[0], 'cc'];
+
+  return align_align(el, tgtRegion, _extends({}, align, { points: points }), pointInView);
+}
+
+/* harmony default export */ var align_alignPoint = (alignPoint_alignPoint);
+// CONCATENATED MODULE: ../node_modules/dom-align/es/index.js
 
 
 
 
 
-
-
-
-
-
-
+/* harmony default export */ var dom_align_es = (align_alignElement);
+// CONCATENATED MODULE: ../node_modules/rc-align/es/util.js
 function buffer(fn, ms) {
   var timer = void 0;
 
@@ -35089,6 +35160,39 @@ function buffer(fn, ms) {
   return bufferFn;
 }
 
+function isSamePoint(prev, next) {
+  if (prev === next) return true;
+  if (!prev || !next) return false;
+
+  return prev.pageX === next.pageX && prev.pageY === next.pageY || prev.clientX === next.clientX && prev.clientY === next.clientY;
+}
+
+function util_isWindow(obj) {
+  return obj && typeof obj === 'object' && obj.window === obj;
+}
+// CONCATENATED MODULE: ../node_modules/rc-align/es/Align.js
+
+
+
+
+
+
+
+
+
+
+
+
+function getElement(func) {
+  if (typeof func !== 'function' || !func) return null;
+  return func();
+}
+
+function getPoint(point) {
+  if (typeof point !== 'object' || !point) return null;
+  return point;
+}
+
 var Align_Align = function (_Component) {
   inherits_default()(Align, _Component);
 
@@ -35102,10 +35206,28 @@ var Align_Align = function (_Component) {
     }
 
     return _ret = (_temp = (_this = possibleConstructorReturn_default()(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.forceAlign = function () {
-      var props = _this.props;
-      if (!props.disabled) {
+      var _this$props = _this.props,
+          disabled = _this$props.disabled,
+          target = _this$props.target,
+          align = _this$props.align,
+          onAlign = _this$props.onAlign;
+
+      if (!disabled && target) {
         var source = react_dom_default.a.findDOMNode(_this);
-        props.onAlign(source, dom_align_es(source, props.target(), props.align));
+
+        var result = void 0;
+        var element = getElement(target);
+        var point = getPoint(target);
+
+        if (element) {
+          result = align_alignElement(source, element, align);
+        } else if (point) {
+          result = align_alignPoint(source, point, align);
+        }
+
+        if (onAlign) {
+          onAlign(source, result);
+        }
       }
     }, _temp), possibleConstructorReturn_default()(_this, _ret);
   }
@@ -35127,11 +35249,18 @@ var Align_Align = function (_Component) {
       if (prevProps.disabled || !shallowequal_default()(prevProps.align, props.align)) {
         reAlign = true;
       } else {
-        var lastTarget = prevProps.target();
-        var currentTarget = props.target();
-        if (isWindow_isWindow(lastTarget) && isWindow_isWindow(currentTarget)) {
+        var lastElement = getElement(prevProps.target);
+        var currentElement = getElement(props.target);
+        var lastPoint = getPoint(prevProps.target);
+        var currentPoint = getPoint(props.target);
+
+        if (util_isWindow(lastElement) && util_isWindow(currentElement)) {
+          // Skip if is window
           reAlign = false;
-        } else if (lastTarget !== currentTarget) {
+        } else if (lastElement !== currentElement || // Element change
+        !lastElement && currentPoint || // Change from element to point
+        !lastPoint && currentElement || // Change from point to element
+        currentPoint && !isSamePoint(lastPoint, currentPoint)) {
           reAlign = true;
         }
       }
@@ -35168,6 +35297,8 @@ var Align_Align = function (_Component) {
   };
 
   Align.prototype.render = function render() {
+    var _this2 = this;
+
     var _props = this.props,
         childrenProps = _props.childrenProps,
         children = _props.children;
@@ -35175,11 +35306,11 @@ var Align_Align = function (_Component) {
     var child = react_default.a.Children.only(children);
     if (childrenProps) {
       var newProps = {};
-      for (var prop in childrenProps) {
-        if (childrenProps.hasOwnProperty(prop)) {
-          newProps[prop] = this.props[childrenProps[prop]];
-        }
-      }
+      var propList = Object.keys(childrenProps);
+      propList.forEach(function (prop) {
+        newProps[prop] = _this2.props[childrenProps[prop]];
+      });
+
       return react_default.a.cloneElement(child, newProps);
     }
     return child;
@@ -35191,7 +35322,12 @@ var Align_Align = function (_Component) {
 Align_Align.propTypes = {
   childrenProps: prop_types_default.a.object,
   align: prop_types_default.a.object.isRequired,
-  target: prop_types_default.a.func,
+  target: prop_types_default.a.oneOfType([prop_types_default.a.func, prop_types_default.a.shape({
+    clientX: prop_types_default.a.number,
+    clientY: prop_types_default.a.number,
+    pageX: prop_types_default.a.number,
+    pageY: prop_types_default.a.number
+  })]),
   onAlign: prop_types_default.a.func,
   monitorBufferTime: prop_types_default.a.number,
   monitorWindowResize: prop_types_default.a.bool,
@@ -35202,7 +35338,6 @@ Align_Align.defaultProps = {
   target: function target() {
     return window;
   },
-  onAlign: function onAlign() {},
   monitorBufferTime: 50,
   monitorWindowResize: false,
   disabled: false
@@ -35212,6 +35347,7 @@ Align_Align.defaultProps = {
 /* harmony default export */ var es_Align = (Align_Align);
 // CONCATENATED MODULE: ../node_modules/rc-align/es/index.js
 // export this package's api
+
 
 /* harmony default export */ var rc_align_es = (es_Align);
 // CONCATENATED MODULE: ../node_modules/rc-trigger/es/LazyRenderBox.js
@@ -35318,7 +35454,10 @@ PopupInner_PopupInner.propTypes = {
 /* harmony default export */ var es_PopupInner = (PopupInner_PopupInner);
 // CONCATENATED MODULE: ../node_modules/rc-trigger/es/utils.js
 
-function isPointsEq(a1, a2) {
+function isPointsEq(a1, a2, isAlignPoint) {
+  if (isAlignPoint) {
+    return a1[0] === a2[0];
+  }
   return a1[0] === a2[0] && a1[1] === a2[1];
 }
 
@@ -35327,11 +35466,11 @@ function getAlignFromPlacement(builtinPlacements, placementStr, align) {
   return extends_default()({}, baseAlign, align);
 }
 
-function getPopupClassNameFromAlign(builtinPlacements, prefixCls, align) {
+function getAlignPopupClassName(builtinPlacements, prefixCls, align, isAlignPoint) {
   var points = align.points;
   for (var placement in builtinPlacements) {
     if (builtinPlacements.hasOwnProperty(placement)) {
-      if (isPointsEq(builtinPlacements[placement].points, points)) {
+      if (isPointsEq(builtinPlacements[placement].points, points, isAlignPoint)) {
         return prefixCls + '-placement-' + placement;
       }
     }
@@ -35393,6 +35532,10 @@ var Popup_Popup = function (_Component) {
   Popup.prototype.getPopupDomNode = function getPopupDomNode() {
     return react_dom_default.a.findDOMNode(this.popupInstance);
   };
+
+  // `target` on `rc-align` can accept as a function to get the bind element or a point.
+  // ref: https://www.npmjs.com/package/rc-align
+
 
   Popup.prototype.getMaskTransitionName = function getMaskTransitionName() {
     var props = this.props;
@@ -35491,7 +35634,7 @@ var Popup_Popup = function (_Component) {
         visible ? react_default.a.createElement(
           rc_align_es,
           {
-            target: this.getTarget,
+            target: this.getAlignTarget(),
             key: 'popup',
             ref: this.saveAlignRef,
             monitorWindowResize: true,
@@ -35521,7 +35664,7 @@ var Popup_Popup = function (_Component) {
       react_default.a.createElement(
         rc_align_es,
         {
-          target: this.getTarget,
+          target: this.getAlignTarget(),
           key: 'popup',
           ref: this.saveAlignRef,
           monitorWindowResize: true,
@@ -35605,7 +35748,11 @@ Popup_Popup.propTypes = {
   prefixCls: prop_types_default.a.string,
   onMouseLeave: prop_types_default.a.func,
   stretch: prop_types_default.a.string,
-  children: prop_types_default.a.node
+  children: prop_types_default.a.node,
+  point: prop_types_default.a.shape({
+    pageX: prop_types_default.a.number,
+    pageY: prop_types_default.a.number
+  })
 };
 
 var Popup__initialiseProps = function _initialiseProps() {
@@ -35656,8 +35803,17 @@ var Popup__initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.getTarget = function () {
+  this.getTargetElement = function () {
     return _this3.props.getRootDomNode();
+  };
+
+  this.getAlignTarget = function () {
+    var point = _this3.props.point;
+
+    if (point) {
+      return point;
+    }
+    return _this3.getTargetElement;
   };
 };
 
@@ -35811,30 +35967,42 @@ var es_Trigger = function (_React$Component) {
     return popupAlign;
   };
 
-  Trigger.prototype.setPopupVisible = function setPopupVisible(popupVisible) {
+  /**
+   * @param popupVisible    Show or not the popup element
+   * @param event           SyntheticEvent, used for `pointAlign`
+   */
+  Trigger.prototype.setPopupVisible = function setPopupVisible(popupVisible, event) {
+    var alignPoint = this.props.alignPoint;
+
+
     this.clearDelayTimer();
+
     if (this.state.popupVisible !== popupVisible) {
       if (!('popupVisible' in this.props)) {
-        this.setState({
-          popupVisible: popupVisible
-        });
+        this.setState({ popupVisible: popupVisible });
       }
       this.props.onPopupVisibleChange(popupVisible);
     }
+
+    // Always record the point position since mouseEnterDelay will delay the show
+    if (alignPoint && event) {
+      this.setPoint(event);
+    }
   };
 
-  Trigger.prototype.delaySetPopupVisible = function delaySetPopupVisible(visible, delayS) {
+  Trigger.prototype.delaySetPopupVisible = function delaySetPopupVisible(visible, delayS, event) {
     var _this3 = this;
 
     var delay = delayS * 1000;
     this.clearDelayTimer();
     if (delay) {
+      var point = event ? { pageX: event.pageX, pageY: event.pageY } : null;
       this.delayTimer = setTimeout(function () {
-        _this3.setPopupVisible(visible);
+        _this3.setPopupVisible(visible, point);
         _this3.clearDelayTimer();
       }, delay);
     } else {
-      this.setPopupVisible(visible);
+      this.setPopupVisible(visible, event);
     }
   };
 
@@ -35957,9 +36125,11 @@ var es_Trigger = function (_React$Component) {
     var _this4 = this;
 
     var popupVisible = this.state.popupVisible;
+    var _props8 = this.props,
+        children = _props8.children,
+        forceRender = _props8.forceRender,
+        alignPoint = _props8.alignPoint;
 
-    var props = this.props;
-    var children = props.children;
     var child = react_default.a.Children.only(children);
     var newChildProps = { key: 'trigger' };
 
@@ -35980,6 +36150,9 @@ var es_Trigger = function (_React$Component) {
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.onMouseEnter = this.onMouseEnter;
+      if (alignPoint) {
+        newChildProps.onMouseMove = this.onMouseMove;
+      }
     } else {
       newChildProps.onMouseEnter = this.createTwoChains('onMouseEnter');
     }
@@ -36005,7 +36178,7 @@ var es_Trigger = function (_React$Component) {
           parent: this,
           visible: popupVisible,
           autoMount: false,
-          forceRender: props.forceRender,
+          forceRender: forceRender,
           getComponent: this.getComponent,
           getContainer: this.getContainer
         },
@@ -36020,7 +36193,7 @@ var es_Trigger = function (_React$Component) {
 
     var portal = void 0;
     // prevent unmounting after it's rendered
-    if (popupVisible || this._component || props.forceRender) {
+    if (popupVisible || this._component || forceRender) {
       portal = react_default.a.createElement(
         es_Portal,
         {
@@ -36071,7 +36244,8 @@ es_Trigger.propTypes = {
   defaultPopupVisible: prop_types_default.a.bool,
   maskTransitionName: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.object]),
   maskAnimation: prop_types_default.a.string,
-  stretch: prop_types_default.a.string
+  stretch: prop_types_default.a.string,
+  alignPoint: prop_types_default.a.bool // Maybe we can support user pass position in the future
 };
 es_Trigger.defaultProps = {
   prefixCls: 'rc-trigger-popup',
@@ -36100,8 +36274,15 @@ var es__initialiseProps = function _initialiseProps() {
   var _this5 = this;
 
   this.onMouseEnter = function (e) {
+    var mouseEnterDelay = _this5.props.mouseEnterDelay;
+
     _this5.fireEvents('onMouseEnter', e);
-    _this5.delaySetPopupVisible(true, _this5.props.mouseEnterDelay);
+    _this5.delaySetPopupVisible(true, mouseEnterDelay, mouseEnterDelay ? null : e);
+  };
+
+  this.onMouseMove = function (e) {
+    _this5.fireEvents('onMouseMove', e);
+    _this5.setPoint(e);
   };
 
   this.onMouseLeave = function (e) {
@@ -36153,7 +36334,7 @@ var es__initialiseProps = function _initialiseProps() {
   this.onContextMenu = function (e) {
     e.preventDefault();
     _this5.fireEvents('onContextMenu', e);
-    _this5.setPopupVisible(true);
+    _this5.setPopupVisible(true, e);
   };
 
   this.onContextMenuClose = function () {
@@ -36184,7 +36365,7 @@ var es__initialiseProps = function _initialiseProps() {
     event.preventDefault();
     var nextVisible = !_this5.state.popupVisible;
     if (_this5.isClickToHide() && !nextVisible || nextVisible && _this5.isClickToShow()) {
-      _this5.setPopupVisible(!_this5.state.popupVisible);
+      _this5.setPopupVisible(!_this5.state.popupVisible, event);
     }
   };
 
@@ -36206,37 +36387,42 @@ var es__initialiseProps = function _initialiseProps() {
 
   this.getPopupClassNameFromAlign = function (align) {
     var className = [];
-    var props = _this5.props;
-    var popupPlacement = props.popupPlacement,
-        builtinPlacements = props.builtinPlacements,
-        prefixCls = props.prefixCls;
+    var _props9 = _this5.props,
+        popupPlacement = _props9.popupPlacement,
+        builtinPlacements = _props9.builtinPlacements,
+        prefixCls = _props9.prefixCls,
+        alignPoint = _props9.alignPoint,
+        getPopupClassNameFromAlign = _props9.getPopupClassNameFromAlign;
 
     if (popupPlacement && builtinPlacements) {
-      className.push(getPopupClassNameFromAlign(builtinPlacements, prefixCls, align));
+      className.push(getAlignPopupClassName(builtinPlacements, prefixCls, align, alignPoint));
     }
-    if (props.getPopupClassNameFromAlign) {
-      className.push(props.getPopupClassNameFromAlign(align));
+    if (getPopupClassNameFromAlign) {
+      className.push(getPopupClassNameFromAlign(align));
     }
     return className.join(' ');
   };
 
   this.getComponent = function () {
-    var _props8 = _this5.props,
-        prefixCls = _props8.prefixCls,
-        destroyPopupOnHide = _props8.destroyPopupOnHide,
-        popupClassName = _props8.popupClassName,
-        action = _props8.action,
-        onPopupAlign = _props8.onPopupAlign,
-        popupAnimation = _props8.popupAnimation,
-        popupTransitionName = _props8.popupTransitionName,
-        popupStyle = _props8.popupStyle,
-        mask = _props8.mask,
-        maskAnimation = _props8.maskAnimation,
-        maskTransitionName = _props8.maskTransitionName,
-        zIndex = _props8.zIndex,
-        popup = _props8.popup,
-        stretch = _props8.stretch;
-    var state = _this5.state;
+    var _props10 = _this5.props,
+        prefixCls = _props10.prefixCls,
+        destroyPopupOnHide = _props10.destroyPopupOnHide,
+        popupClassName = _props10.popupClassName,
+        action = _props10.action,
+        onPopupAlign = _props10.onPopupAlign,
+        popupAnimation = _props10.popupAnimation,
+        popupTransitionName = _props10.popupTransitionName,
+        popupStyle = _props10.popupStyle,
+        mask = _props10.mask,
+        maskAnimation = _props10.maskAnimation,
+        maskTransitionName = _props10.maskTransitionName,
+        zIndex = _props10.zIndex,
+        popup = _props10.popup,
+        stretch = _props10.stretch,
+        alignPoint = _props10.alignPoint;
+    var _state = _this5.state,
+        popupVisible = _state.popupVisible,
+        point = _state.point;
 
 
     var align = _this5.getPopupAlign();
@@ -36254,7 +36440,8 @@ var es__initialiseProps = function _initialiseProps() {
       extends_default()({
         prefixCls: prefixCls,
         destroyPopupOnHide: destroyPopupOnHide,
-        visible: state.popupVisible,
+        visible: popupVisible,
+        point: alignPoint && point,
         className: popupClassName,
         action: action,
         align: align,
@@ -36289,6 +36476,19 @@ var es__initialiseProps = function _initialiseProps() {
     var mountNode = props.getPopupContainer ? props.getPopupContainer(Object(react_dom["findDOMNode"])(_this5)) : props.getDocument().body;
     mountNode.appendChild(popupContainer);
     return popupContainer;
+  };
+
+  this.setPoint = function (point) {
+    var alignPoint = _this5.props.alignPoint;
+
+    if (!alignPoint || !point) return;
+
+    _this5.setState({
+      point: {
+        pageX: point.pageX,
+        pageY: point.pageY
+      }
+    });
   };
 
   this.handlePortalUpdate = function () {
@@ -37580,6 +37780,11 @@ var DropdownMenu_DropdownMenu = function (_React$Component) {
           }
           return clone(item);
         });
+      } else {
+        // Clear firstActiveItem when dropdown menu items was empty
+        // Avoid `Unable to find node on an unmounted component`
+        // https://github.com/ant-design/ant-design/issues/10774
+        this.firstActiveItem = null;
       }
 
       // clear activeKey when inputValue change
@@ -38747,7 +38952,7 @@ var Select__initialiseProps = function _initialiseProps() {
     };
     // clear search input value when open is false in singleMode.
     if (!open && isSingleMode(props) && props.showSearch) {
-      _this2.setInputValue('');
+      _this2.setInputValue('', false);
     }
     if (!open) {
       _this2.maybeFocus(open, needFocus);
@@ -39759,7 +39964,7 @@ var placements_placements = {
 
 /* harmony default export */ var rc_dropdown_es_placements = (placements_placements);
 // CONCATENATED MODULE: ../node_modules/rc-dropdown/es/Dropdown.js
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var Dropdown__extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -39844,7 +40049,7 @@ var Dropdown_Dropdown = function (_Component) {
 
     return react_default.a.createElement(
       rc_trigger_es,
-      _extends({}, otherProps, {
+      Dropdown__extends({}, otherProps, {
         prefixCls: prefixCls,
         ref: this.saveTrigger,
         popupClassName: overlayClassName,
@@ -41341,6 +41546,8 @@ var menu_SubMenu_SubMenu = function (_React$Component) {
 menu_SubMenu_SubMenu.contextTypes = {
     antdMenuTheme: prop_types_default.a.string
 };
+// fix issue:https://github.com/ant-design/ant-design/issues/8666
+menu_SubMenu_SubMenu.isSubMenu = 1;
 /* harmony default export */ var menu_SubMenu = (menu_SubMenu_SubMenu);
 // CONCATENATED MODULE: ../node_modules/rc-tooltip/es/placements.js
 var rc_tooltip_es_placements_autoAdjustOverflow = {
@@ -43808,6 +44015,7 @@ Notification_Notification.newInstance = function newNotificationInstance(propert
 
 /* harmony default export */ var rc_notification_es = (es_Notification);
 // CONCATENATED MODULE: ../node_modules/antd/es/message/index.js
+/* global Promise */
 
 
 
@@ -43856,29 +44064,42 @@ function message_notice(content) {
         duration = defaultDuration;
     }
     var target = message_key++;
-    getMessageInstance(function (instance) {
-        instance.notice({
-            key: target,
-            duration: duration,
-            style: {},
-            content: react["createElement"](
-                'div',
-                { className: message_prefixCls + '-custom-content ' + message_prefixCls + '-' + type },
-                react["createElement"](es_icon, { type: iconType }),
-                react["createElement"](
-                    'span',
-                    null,
-                    content
-                )
-            ),
-            onClose: onClose
+    var closePromise = new Promise(function (resolve) {
+        var callback = function callback() {
+            if (typeof onClose === 'function') {
+                onClose();
+            }
+            return resolve(true);
+        };
+        getMessageInstance(function (instance) {
+            instance.notice({
+                key: target,
+                duration: duration,
+                style: {},
+                content: react["createElement"](
+                    'div',
+                    { className: message_prefixCls + '-custom-content ' + message_prefixCls + '-' + type },
+                    react["createElement"](es_icon, { type: iconType }),
+                    react["createElement"](
+                        'span',
+                        null,
+                        content
+                    )
+                ),
+                onClose: callback
+            });
         });
     });
-    return function () {
+    var result = function result() {
         if (messageInstance) {
             messageInstance.removeNotice(target);
         }
     };
+    result.then = function (filled, rejected) {
+        return closePromise.then(filled, rejected);
+    };
+    result.promise = closePromise;
+    return result;
 }
 /* harmony default export */ var es_message = ({
     info: function info(content, duration, onClose) {
