@@ -3863,11 +3863,12 @@ mark {
 .ant-btn + .ant-btn-group,
 .ant-btn-group span + .ant-btn,
 .ant-btn-group .ant-btn + span,
+.ant-btn-group > span + span,
 .ant-btn-group + .ant-btn,
 .ant-btn-group + .ant-btn-group {
   margin-left: -1px;
 }
-.ant-btn-group .ant-btn-primary + .ant-btn:not(.ant-btn-primary) {
+.ant-btn-group .ant-btn-primary + .ant-btn:not(.ant-btn-primary):not([disabled]) {
   border-left-color: transparent;
 }
 .ant-btn-group .ant-btn:not(:first-child):not(:last-child) {
@@ -6508,6 +6509,7 @@ span.ant-radio + * {
 .ant-spin-dot {
   position: relative;
   display: inline-block;
+  font-size: 20px;
   width: 20px;
   height: 20px;
 }
@@ -6555,6 +6557,7 @@ span.ant-radio + * {
           animation: antRotate 1.2s infinite linear;
 }
 .ant-spin-sm .ant-spin-dot {
+  font-size: 14px;
   width: 14px;
   height: 14px;
 }
@@ -6563,6 +6566,7 @@ span.ant-radio + * {
   height: 6px;
 }
 .ant-spin-lg .ant-spin-dot {
+  font-size: 32px;
   width: 32px;
   height: 32px;
 }

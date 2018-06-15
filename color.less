@@ -1521,7 +1521,7 @@ this.tinycolor = tinycolor;
 
 @info-color             : @blue-6;
 @success-color          : @green-6;
-@processing-color       : @primary-color;
+@processing-color       : @blue-6;
 @error-color            : @red-6;
 @highlight-color        : @red-6;
 @warning-color          : @gold-6;
@@ -2696,7 +2696,7 @@ mark {
 .ant-btn-group-sm > .ant-btn {
   border-radius: 4px;
 }
-.ant-btn-group .ant-btn-primary + .ant-btn:not(.ant-btn-primary) {
+.ant-btn-group .ant-btn-primary + .ant-btn:not(.ant-btn-primary):not([disabled]) {
   border-left-color: transparent;
 }
 .ant-btn-group .ant-btn:not(:first-child):not(:last-child) {
