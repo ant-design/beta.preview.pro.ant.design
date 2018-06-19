@@ -57,13 +57,25 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "n5Qe");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "+00f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.decode = exports.parse = __webpack_require__("J6GP");
+exports.encode = exports.stringify = __webpack_require__("bvhO");
+
+
+/***/ }),
 
 /***/ "+CtU":
 /***/ (function(module, exports, __webpack_require__) {
@@ -1157,208 +1169,183 @@ module.exports = assignMergeValue;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getFakeChartData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("a2/B");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+ // mock data
 
+var visitData = [];
+var beginDay = new Date().getTime();
+var fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5];
 
-// mock data
-const visitData = [];
-const beginDay = new Date().getTime();
-
-const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5];
-for (let i = 0; i < fakeY.length; i += 1) {
+for (var i = 0; i < fakeY.length; i += 1) {
   visitData.push({
     x: __WEBPACK_IMPORTED_MODULE_0_moment___default()(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format('YYYY-MM-DD'),
-    y: fakeY[i],
+    y: fakeY[i]
   });
 }
 
-const visitData2 = [];
-const fakeY2 = [1, 6, 4, 8, 3, 7, 2];
-for (let i = 0; i < fakeY2.length; i += 1) {
+var visitData2 = [];
+var fakeY2 = [1, 6, 4, 8, 3, 7, 2];
+
+for (var _i = 0; _i < fakeY2.length; _i += 1) {
   visitData2.push({
-    x: __WEBPACK_IMPORTED_MODULE_0_moment___default()(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format('YYYY-MM-DD'),
-    y: fakeY2[i],
+    x: __WEBPACK_IMPORTED_MODULE_0_moment___default()(new Date(beginDay + 1000 * 60 * 60 * 24 * _i)).format('YYYY-MM-DD'),
+    y: fakeY2[_i]
   });
 }
 
-const salesData = [];
-for (let i = 0; i < 12; i += 1) {
+var salesData = [];
+
+for (var _i2 = 0; _i2 < 12; _i2 += 1) {
   salesData.push({
-    x: `${i + 1}月`,
-    y: Math.floor(Math.random() * 1000) + 200,
+    x: "".concat(_i2 + 1, "\u6708"),
+    y: Math.floor(Math.random() * 1000) + 200
   });
 }
-const searchData = [];
-for (let i = 0; i < 50; i += 1) {
+
+var searchData = [];
+
+for (var _i3 = 0; _i3 < 50; _i3 += 1) {
   searchData.push({
-    index: i + 1,
-    keyword: `搜索关键词-${i}`,
+    index: _i3 + 1,
+    keyword: "\u641C\u7D22\u5173\u952E\u8BCD-".concat(_i3),
     count: Math.floor(Math.random() * 1000),
     range: Math.floor(Math.random() * 100),
-    status: Math.floor((Math.random() * 10) % 2),
+    status: Math.floor(Math.random() * 10 % 2)
   });
 }
-const salesTypeData = [
-  {
-    x: '家用电器',
-    y: 4544,
-  },
-  {
-    x: '食用酒水',
-    y: 3321,
-  },
-  {
-    x: '个护健康',
-    y: 3113,
-  },
-  {
-    x: '服饰箱包',
-    y: 2341,
-  },
-  {
-    x: '母婴产品',
-    y: 1231,
-  },
-  {
-    x: '其他',
-    y: 1231,
-  },
-];
 
-const salesTypeDataOnline = [
-  {
-    x: '家用电器',
-    y: 244,
-  },
-  {
-    x: '食用酒水',
-    y: 321,
-  },
-  {
-    x: '个护健康',
-    y: 311,
-  },
-  {
-    x: '服饰箱包',
-    y: 41,
-  },
-  {
-    x: '母婴产品',
-    y: 121,
-  },
-  {
-    x: '其他',
-    y: 111,
-  },
-];
+var salesTypeData = [{
+  x: '家用电器',
+  y: 4544
+}, {
+  x: '食用酒水',
+  y: 3321
+}, {
+  x: '个护健康',
+  y: 3113
+}, {
+  x: '服饰箱包',
+  y: 2341
+}, {
+  x: '母婴产品',
+  y: 1231
+}, {
+  x: '其他',
+  y: 1231
+}];
+var salesTypeDataOnline = [{
+  x: '家用电器',
+  y: 244
+}, {
+  x: '食用酒水',
+  y: 321
+}, {
+  x: '个护健康',
+  y: 311
+}, {
+  x: '服饰箱包',
+  y: 41
+}, {
+  x: '母婴产品',
+  y: 121
+}, {
+  x: '其他',
+  y: 111
+}];
+var salesTypeDataOffline = [{
+  x: '家用电器',
+  y: 99
+}, {
+  x: '个护健康',
+  y: 188
+}, {
+  x: '服饰箱包',
+  y: 344
+}, {
+  x: '母婴产品',
+  y: 255
+}, {
+  x: '其他',
+  y: 65
+}];
+var offlineData = [];
 
-const salesTypeDataOffline = [
-  {
-    x: '家用电器',
-    y: 99,
-  },
-  {
-    x: '个护健康',
-    y: 188,
-  },
-  {
-    x: '服饰箱包',
-    y: 344,
-  },
-  {
-    x: '母婴产品',
-    y: 255,
-  },
-  {
-    x: '其他',
-    y: 65,
-  },
-];
-
-const offlineData = [];
-for (let i = 0; i < 10; i += 1) {
+for (var _i4 = 0; _i4 < 10; _i4 += 1) {
   offlineData.push({
-    name: `门店${i}`,
-    cvr: Math.ceil(Math.random() * 9) / 10,
+    name: "\u95E8\u5E97".concat(_i4),
+    cvr: Math.ceil(Math.random() * 9) / 10
   });
 }
-const offlineChartData = [];
-for (let i = 0; i < 20; i += 1) {
+
+var offlineChartData = [];
+
+for (var _i5 = 0; _i5 < 20; _i5 += 1) {
   offlineChartData.push({
-    x: new Date().getTime() + 1000 * 60 * 30 * i,
+    x: new Date().getTime() + 1000 * 60 * 30 * _i5,
     y1: Math.floor(Math.random() * 100) + 10,
-    y2: Math.floor(Math.random() * 100) + 10,
+    y2: Math.floor(Math.random() * 100) + 10
   });
 }
 
-const radarOriginData = [
-  {
-    name: '个人',
-    ref: 10,
-    koubei: 8,
-    output: 4,
-    contribute: 5,
-    hot: 7,
-  },
-  {
-    name: '团队',
-    ref: 3,
-    koubei: 9,
-    output: 6,
-    contribute: 3,
-    hot: 1,
-  },
-  {
-    name: '部门',
-    ref: 4,
-    koubei: 1,
-    output: 6,
-    contribute: 5,
-    hot: 7,
-  },
-];
+var radarOriginData = [{
+  name: '个人',
+  ref: 10,
+  koubei: 8,
+  output: 4,
+  contribute: 5,
+  hot: 7
+}, {
+  name: '团队',
+  ref: 3,
+  koubei: 9,
+  output: 6,
+  contribute: 3,
+  hot: 1
+}, {
+  name: '部门',
+  ref: 4,
+  koubei: 1,
+  output: 6,
+  contribute: 5,
+  hot: 7
+}]; //
 
-//
-const radarData = [];
-const radarTitleMap = {
+var radarData = [];
+var radarTitleMap = {
   ref: '引用',
   koubei: '口碑',
   output: '产量',
   contribute: '贡献',
-  hot: '热度',
+  hot: '热度'
 };
-radarOriginData.forEach(item => {
-  Object.keys(item).forEach(key => {
+radarOriginData.forEach(function (item) {
+  Object.keys(item).forEach(function (key) {
     if (key !== 'name') {
       radarData.push({
         name: item.name,
         label: radarTitleMap[key],
-        value: item[key],
+        value: item[key]
       });
     }
   });
 });
-
-const getFakeChartData = {
-  visitData,
-  visitData2,
-  salesData,
-  searchData,
-  offlineData,
-  offlineChartData,
-  salesTypeData,
-  salesTypeDataOnline,
-  salesTypeDataOffline,
-  radarData,
+var getFakeChartData = {
+  visitData: visitData,
+  visitData2: visitData2,
+  salesData: salesData,
+  searchData: searchData,
+  offlineData: offlineData,
+  offlineChartData: offlineChartData,
+  salesTypeData: salesTypeData,
+  salesTypeDataOnline: salesTypeDataOnline,
+  salesTypeDataOffline: salesTypeDataOffline,
+  radarData: radarData
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = getFakeChartData;
-
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({
-  getFakeChartData,
+  getFakeChartData: getFakeChartData
 });
-
 
 /***/ }),
 
@@ -1723,6 +1710,30 @@ module.exports = get;
 
 /***/ }),
 
+/***/ "5YsI":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  isString: function(arg) {
+    return typeof(arg) === 'string';
+  },
+  isObject: function(arg) {
+    return typeof(arg) === 'object' && arg !== null;
+  },
+  isNull: function(arg) {
+    return arg === null;
+  },
+  isNullOrUndefined: function(arg) {
+    return arg == null;
+  }
+};
+
+
+/***/ }),
+
 /***/ "6MLN":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1989,9 +2000,7 @@ module.exports = baseKeysIn;
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mockjs__ = __webpack_require__("eMAQ");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mockjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mockjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_rule__ = __webpack_require__("IMUl");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_rule___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__mock_rule__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mock_api__ = __webpack_require__("mCGg");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mock_api___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__mock_api__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mock_chart__ = __webpack_require__("2U7Q");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mock_profile__ = __webpack_require__("YShb");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mock_notices__ = __webpack_require__("ZJYB");
@@ -2093,9 +2102,9 @@ const proxy = {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'GET /api/project/notice': __WEBPACK_IMPORTED_MODULE_2__mock_api__["getNotice"],
-  'GET /api/activities': __WEBPACK_IMPORTED_MODULE_2__mock_api__["getActivities"],
-  'GET /api/rule': __WEBPACK_IMPORTED_MODULE_1__mock_rule__["getRule"],
+  'GET /api/project/notice': __WEBPACK_IMPORTED_MODULE_2__mock_api__["d" /* getNotice */],
+  'GET /api/activities': __WEBPACK_IMPORTED_MODULE_2__mock_api__["a" /* getActivities */],
+  'GET /api/rule': __WEBPACK_IMPORTED_MODULE_1__mock_rule__["a" /* getRule */],
   'POST /api/rule': {
     $params: {
       pageSize: {
@@ -2103,7 +2112,7 @@ const proxy = {
         exp: 2,
       },
     },
-    $body: __WEBPACK_IMPORTED_MODULE_1__mock_rule__["postRule"],
+    $body: __WEBPACK_IMPORTED_MODULE_1__mock_rule__["b" /* postRule */],
   },
   'POST /api/forms': (req, res) => {
     res.send({ message: 'Ok' });
@@ -2111,8 +2120,8 @@ const proxy = {
   'GET /api/tags': __WEBPACK_IMPORTED_MODULE_0_mockjs___default.a.mock({
     'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
   }),
-  'GET /api/fake_list': __WEBPACK_IMPORTED_MODULE_2__mock_api__["getFakeList"],
-  'POST /api/fake_list': __WEBPACK_IMPORTED_MODULE_2__mock_api__["postFakeList"],
+  'GET /api/fake_list': __WEBPACK_IMPORTED_MODULE_2__mock_api__["c" /* getFakeList */],
+  'POST /api/fake_list': __WEBPACK_IMPORTED_MODULE_2__mock_api__["e" /* postFakeList */],
   'GET /api/fake_chart_data': __WEBPACK_IMPORTED_MODULE_3__mock_chart__["a" /* getFakeChartData */],
   'GET /api/profile/basic': __WEBPACK_IMPORTED_MODULE_4__mock_profile__["b" /* getProfileBasicData */],
   'GET /api/profile/advanced': __WEBPACK_IMPORTED_MODULE_4__mock_profile__["a" /* getProfileAdvancedData */],
@@ -2182,7 +2191,7 @@ const proxy = {
   },
   'GET /api/geographic/province': __WEBPACK_IMPORTED_MODULE_7__mock_geographic__["b" /* getProvince */],
   'GET /api/geographic/city/:province': __WEBPACK_IMPORTED_MODULE_7__mock_geographic__["a" /* getCity */],
-  'GET /api/captcha': __WEBPACK_IMPORTED_MODULE_2__mock_api__["getFakeCaptcha"],
+  'GET /api/captcha': __WEBPACK_IMPORTED_MODULE_2__mock_api__["b" /* getFakeCaptcha */],
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (noProxy ? {} : Object(__WEBPACK_IMPORTED_MODULE_6_roadhog_api_doc__["delay"])(proxy, 1000));
@@ -3332,6 +3341,546 @@ module.exports = { "default": __webpack_require__("3v7p"), __esModule: true };
 
 /***/ }),
 
+/***/ "FIMm":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
+;(function(root) {
+
+	/** Detect free variables */
+	var freeExports = typeof exports == 'object' && exports &&
+		!exports.nodeType && exports;
+	var freeModule = typeof module == 'object' && module &&
+		!module.nodeType && module;
+	var freeGlobal = typeof global == 'object' && global;
+	if (
+		freeGlobal.global === freeGlobal ||
+		freeGlobal.window === freeGlobal ||
+		freeGlobal.self === freeGlobal
+	) {
+		root = freeGlobal;
+	}
+
+	/**
+	 * The `punycode` object.
+	 * @name punycode
+	 * @type Object
+	 */
+	var punycode,
+
+	/** Highest positive signed 32-bit float value */
+	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
+
+	/** Bootstring parameters */
+	base = 36,
+	tMin = 1,
+	tMax = 26,
+	skew = 38,
+	damp = 700,
+	initialBias = 72,
+	initialN = 128, // 0x80
+	delimiter = '-', // '\x2D'
+
+	/** Regular expressions */
+	regexPunycode = /^xn--/,
+	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
+
+	/** Error messages */
+	errors = {
+		'overflow': 'Overflow: input needs wider integers to process',
+		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+		'invalid-input': 'Invalid input'
+	},
+
+	/** Convenience shortcuts */
+	baseMinusTMin = base - tMin,
+	floor = Math.floor,
+	stringFromCharCode = String.fromCharCode,
+
+	/** Temporary variable */
+	key;
+
+	/*--------------------------------------------------------------------------*/
+
+	/**
+	 * A generic error utility function.
+	 * @private
+	 * @param {String} type The error type.
+	 * @returns {Error} Throws a `RangeError` with the applicable error message.
+	 */
+	function error(type) {
+		throw new RangeError(errors[type]);
+	}
+
+	/**
+	 * A generic `Array#map` utility function.
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} callback The function that gets called for every array
+	 * item.
+	 * @returns {Array} A new array of values returned by the callback function.
+	 */
+	function map(array, fn) {
+		var length = array.length;
+		var result = [];
+		while (length--) {
+			result[length] = fn(array[length]);
+		}
+		return result;
+	}
+
+	/**
+	 * A simple `Array#map`-like wrapper to work with domain name strings or email
+	 * addresses.
+	 * @private
+	 * @param {String} domain The domain name or email address.
+	 * @param {Function} callback The function that gets called for every
+	 * character.
+	 * @returns {Array} A new string of characters returned by the callback
+	 * function.
+	 */
+	function mapDomain(string, fn) {
+		var parts = string.split('@');
+		var result = '';
+		if (parts.length > 1) {
+			// In email addresses, only the domain name should be punycoded. Leave
+			// the local part (i.e. everything up to `@`) intact.
+			result = parts[0] + '@';
+			string = parts[1];
+		}
+		// Avoid `split(regex)` for IE8 compatibility. See #17.
+		string = string.replace(regexSeparators, '\x2E');
+		var labels = string.split('.');
+		var encoded = map(labels, fn).join('.');
+		return result + encoded;
+	}
+
+	/**
+	 * Creates an array containing the numeric code points of each Unicode
+	 * character in the string. While JavaScript uses UCS-2 internally,
+	 * this function will convert a pair of surrogate halves (each of which
+	 * UCS-2 exposes as separate characters) into a single code point,
+	 * matching UTF-16.
+	 * @see `punycode.ucs2.encode`
+	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+	 * @memberOf punycode.ucs2
+	 * @name decode
+	 * @param {String} string The Unicode input string (UCS-2).
+	 * @returns {Array} The new array of code points.
+	 */
+	function ucs2decode(string) {
+		var output = [],
+		    counter = 0,
+		    length = string.length,
+		    value,
+		    extra;
+		while (counter < length) {
+			value = string.charCodeAt(counter++);
+			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+				// high surrogate, and there is a next character
+				extra = string.charCodeAt(counter++);
+				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+				} else {
+					// unmatched surrogate; only append this code unit, in case the next
+					// code unit is the high surrogate of a surrogate pair
+					output.push(value);
+					counter--;
+				}
+			} else {
+				output.push(value);
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * Creates a string based on an array of numeric code points.
+	 * @see `punycode.ucs2.decode`
+	 * @memberOf punycode.ucs2
+	 * @name encode
+	 * @param {Array} codePoints The array of numeric code points.
+	 * @returns {String} The new Unicode string (UCS-2).
+	 */
+	function ucs2encode(array) {
+		return map(array, function(value) {
+			var output = '';
+			if (value > 0xFFFF) {
+				value -= 0x10000;
+				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+				value = 0xDC00 | value & 0x3FF;
+			}
+			output += stringFromCharCode(value);
+			return output;
+		}).join('');
+	}
+
+	/**
+	 * Converts a basic code point into a digit/integer.
+	 * @see `digitToBasic()`
+	 * @private
+	 * @param {Number} codePoint The basic numeric code point value.
+	 * @returns {Number} The numeric value of a basic code point (for use in
+	 * representing integers) in the range `0` to `base - 1`, or `base` if
+	 * the code point does not represent a value.
+	 */
+	function basicToDigit(codePoint) {
+		if (codePoint - 48 < 10) {
+			return codePoint - 22;
+		}
+		if (codePoint - 65 < 26) {
+			return codePoint - 65;
+		}
+		if (codePoint - 97 < 26) {
+			return codePoint - 97;
+		}
+		return base;
+	}
+
+	/**
+	 * Converts a digit/integer into a basic code point.
+	 * @see `basicToDigit()`
+	 * @private
+	 * @param {Number} digit The numeric value of a basic code point.
+	 * @returns {Number} The basic code point whose value (when used for
+	 * representing integers) is `digit`, which needs to be in the range
+	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+	 * used; else, the lowercase form is used. The behavior is undefined
+	 * if `flag` is non-zero and `digit` has no uppercase form.
+	 */
+	function digitToBasic(digit, flag) {
+		//  0..25 map to ASCII a..z or A..Z
+		// 26..35 map to ASCII 0..9
+		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+	}
+
+	/**
+	 * Bias adaptation function as per section 3.4 of RFC 3492.
+	 * https://tools.ietf.org/html/rfc3492#section-3.4
+	 * @private
+	 */
+	function adapt(delta, numPoints, firstTime) {
+		var k = 0;
+		delta = firstTime ? floor(delta / damp) : delta >> 1;
+		delta += floor(delta / numPoints);
+		for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+			delta = floor(delta / baseMinusTMin);
+		}
+		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+	}
+
+	/**
+	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+	 * symbols.
+	 * @memberOf punycode
+	 * @param {String} input The Punycode string of ASCII-only symbols.
+	 * @returns {String} The resulting string of Unicode symbols.
+	 */
+	function decode(input) {
+		// Don't use UCS-2
+		var output = [],
+		    inputLength = input.length,
+		    out,
+		    i = 0,
+		    n = initialN,
+		    bias = initialBias,
+		    basic,
+		    j,
+		    index,
+		    oldi,
+		    w,
+		    k,
+		    digit,
+		    t,
+		    /** Cached calculation results */
+		    baseMinusT;
+
+		// Handle the basic code points: let `basic` be the number of input code
+		// points before the last delimiter, or `0` if there is none, then copy
+		// the first basic code points to the output.
+
+		basic = input.lastIndexOf(delimiter);
+		if (basic < 0) {
+			basic = 0;
+		}
+
+		for (j = 0; j < basic; ++j) {
+			// if it's not a basic code point
+			if (input.charCodeAt(j) >= 0x80) {
+				error('not-basic');
+			}
+			output.push(input.charCodeAt(j));
+		}
+
+		// Main decoding loop: start just after the last delimiter if any basic code
+		// points were copied; start at the beginning otherwise.
+
+		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+
+			// `index` is the index of the next character to be consumed.
+			// Decode a generalized variable-length integer into `delta`,
+			// which gets added to `i`. The overflow checking is easier
+			// if we increase `i` as we go, then subtract off its starting
+			// value at the end to obtain `delta`.
+			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+
+				if (index >= inputLength) {
+					error('invalid-input');
+				}
+
+				digit = basicToDigit(input.charCodeAt(index++));
+
+				if (digit >= base || digit > floor((maxInt - i) / w)) {
+					error('overflow');
+				}
+
+				i += digit * w;
+				t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+
+				if (digit < t) {
+					break;
+				}
+
+				baseMinusT = base - t;
+				if (w > floor(maxInt / baseMinusT)) {
+					error('overflow');
+				}
+
+				w *= baseMinusT;
+
+			}
+
+			out = output.length + 1;
+			bias = adapt(i - oldi, out, oldi == 0);
+
+			// `i` was supposed to wrap around from `out` to `0`,
+			// incrementing `n` each time, so we'll fix that now:
+			if (floor(i / out) > maxInt - n) {
+				error('overflow');
+			}
+
+			n += floor(i / out);
+			i %= out;
+
+			// Insert `n` at position `i` of the output
+			output.splice(i++, 0, n);
+
+		}
+
+		return ucs2encode(output);
+	}
+
+	/**
+	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+	 * Punycode string of ASCII-only symbols.
+	 * @memberOf punycode
+	 * @param {String} input The string of Unicode symbols.
+	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+	 */
+	function encode(input) {
+		var n,
+		    delta,
+		    handledCPCount,
+		    basicLength,
+		    bias,
+		    j,
+		    m,
+		    q,
+		    k,
+		    t,
+		    currentValue,
+		    output = [],
+		    /** `inputLength` will hold the number of code points in `input`. */
+		    inputLength,
+		    /** Cached calculation results */
+		    handledCPCountPlusOne,
+		    baseMinusT,
+		    qMinusT;
+
+		// Convert the input in UCS-2 to Unicode
+		input = ucs2decode(input);
+
+		// Cache the length
+		inputLength = input.length;
+
+		// Initialize the state
+		n = initialN;
+		delta = 0;
+		bias = initialBias;
+
+		// Handle the basic code points
+		for (j = 0; j < inputLength; ++j) {
+			currentValue = input[j];
+			if (currentValue < 0x80) {
+				output.push(stringFromCharCode(currentValue));
+			}
+		}
+
+		handledCPCount = basicLength = output.length;
+
+		// `handledCPCount` is the number of code points that have been handled;
+		// `basicLength` is the number of basic code points.
+
+		// Finish the basic string - if it is not empty - with a delimiter
+		if (basicLength) {
+			output.push(delimiter);
+		}
+
+		// Main encoding loop:
+		while (handledCPCount < inputLength) {
+
+			// All non-basic code points < n have been handled already. Find the next
+			// larger one:
+			for (m = maxInt, j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue >= n && currentValue < m) {
+					m = currentValue;
+				}
+			}
+
+			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+			// but guard against overflow
+			handledCPCountPlusOne = handledCPCount + 1;
+			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+				error('overflow');
+			}
+
+			delta += (m - n) * handledCPCountPlusOne;
+			n = m;
+
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+
+				if (currentValue < n && ++delta > maxInt) {
+					error('overflow');
+				}
+
+				if (currentValue == n) {
+					// Represent delta as a generalized variable-length integer
+					for (q = delta, k = base; /* no condition */; k += base) {
+						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+						if (q < t) {
+							break;
+						}
+						qMinusT = q - t;
+						baseMinusT = base - t;
+						output.push(
+							stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+						);
+						q = floor(qMinusT / baseMinusT);
+					}
+
+					output.push(stringFromCharCode(digitToBasic(q, 0)));
+					bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+					delta = 0;
+					++handledCPCount;
+				}
+			}
+
+			++delta;
+			++n;
+
+		}
+		return output.join('');
+	}
+
+	/**
+	 * Converts a Punycode string representing a domain name or an email address
+	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+	 * it doesn't matter if you call it on a string that has already been
+	 * converted to Unicode.
+	 * @memberOf punycode
+	 * @param {String} input The Punycoded domain name or email address to
+	 * convert to Unicode.
+	 * @returns {String} The Unicode representation of the given Punycode
+	 * string.
+	 */
+	function toUnicode(input) {
+		return mapDomain(input, function(string) {
+			return regexPunycode.test(string)
+				? decode(string.slice(4).toLowerCase())
+				: string;
+		});
+	}
+
+	/**
+	 * Converts a Unicode string representing a domain name or an email address to
+	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+	 * i.e. it doesn't matter if you call it with a domain that's already in
+	 * ASCII.
+	 * @memberOf punycode
+	 * @param {String} input The domain name or email address to convert, as a
+	 * Unicode string.
+	 * @returns {String} The Punycode representation of the given domain name or
+	 * email address.
+	 */
+	function toASCII(input) {
+		return mapDomain(input, function(string) {
+			return regexNonASCII.test(string)
+				? 'xn--' + encode(string)
+				: string;
+		});
+	}
+
+	/*--------------------------------------------------------------------------*/
+
+	/** Define the public API */
+	punycode = {
+		/**
+		 * A string representing the current Punycode.js version number.
+		 * @memberOf punycode
+		 * @type String
+		 */
+		'version': '1.4.1',
+		/**
+		 * An object of methods to convert from JavaScript's internal character
+		 * representation (UCS-2) to Unicode code points, and back.
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode
+		 * @type Object
+		 */
+		'ucs2': {
+			'decode': ucs2decode,
+			'encode': ucs2encode
+		},
+		'decode': decode,
+		'encode': encode,
+		'toASCII': toASCII,
+		'toUnicode': toUnicode
+	};
+
+	/** Expose `punycode` */
+	// Some AMD build optimizers, like r.js, check for specific condition patterns
+	// like the following:
+	if (
+		true
+	) {
+		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+			return punycode;
+		}).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if (freeExports && freeModule) {
+		if (module.exports == freeExports) {
+			// in Node.js, io.js, or RingoJS v0.8.0+
+			freeModule.exports = punycode;
+		} else {
+			// in Narwhal or RingoJS v0.7.0-
+			for (key in punycode) {
+				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
+			}
+		}
+	} else {
+		// in Rhino or a web browser
+		root.punycode = punycode;
+	}
+
+}(this));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("l262")(module), __webpack_require__("h6ac")))
+
+/***/ }),
+
 /***/ "FIbo":
 /***/ (function(module, exports) {
 
@@ -3986,9 +4535,181 @@ module.exports = function () { /* empty */ };
 /***/ }),
 
 /***/ "IMUl":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module parse failed: Unexpected token (119:19)\nYou may need an appropriate loader to handle this file type.\n|       tableListDataSource = tableListDataSource.map(item => {\n|         if (item.key === key) {\n|           return { ...item, desc, name };\n|         }\n|         return item;");
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getRule;
+/* harmony export (immutable) */ __webpack_exports__["b"] = postRule;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_url__ = __webpack_require__("Mej7");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_url___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_url__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+ // mock tableListDataSource
+
+var tableListDataSource = [];
+
+for (var i = 0; i < 46; i += 1) {
+  tableListDataSource.push({
+    key: i,
+    disabled: i % 6 === 0,
+    href: 'https://ant.design',
+    avatar: ['https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png', 'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png'][i % 2],
+    name: "TradeCode ".concat(i),
+    title: "\u4E00\u4E2A\u4EFB\u52A1\u540D\u79F0 ".concat(i),
+    owner: '曲丽丽',
+    desc: '这是一段描述',
+    callNo: Math.floor(Math.random() * 1000),
+    status: Math.floor(Math.random() * 10) % 4,
+    updatedAt: new Date("2017-07-".concat(Math.floor(i / 2) + 1)),
+    createdAt: new Date("2017-07-".concat(Math.floor(i / 2) + 1)),
+    progress: Math.ceil(Math.random() * 100)
+  });
+}
+
+function getRule(req, res, u) {
+  var url = u;
+
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+
+  var params = Object(__WEBPACK_IMPORTED_MODULE_0_url__["parse"])(url, true).query;
+
+  var dataSource = _toConsumableArray(tableListDataSource);
+
+  if (params.sorter) {
+    var s = params.sorter.split('_');
+    dataSource = dataSource.sort(function (prev, next) {
+      if (s[1] === 'descend') {
+        return next[s[0]] - prev[s[0]];
+      }
+
+      return prev[s[0]] - next[s[0]];
+    });
+  }
+
+  if (params.status) {
+    var status = params.status.split(',');
+    var filterDataSource = [];
+    status.forEach(function (s) {
+      filterDataSource = filterDataSource.concat(_toConsumableArray(dataSource).filter(function (data) {
+        return parseInt(data.status, 10) === parseInt(s[0], 10);
+      }));
+    });
+    dataSource = filterDataSource;
+  }
+
+  if (params.name) {
+    dataSource = dataSource.filter(function (data) {
+      return data.name.indexOf(params.name) > -1;
+    });
+  }
+
+  var pageSize = 10;
+
+  if (params.pageSize) {
+    pageSize = params.pageSize * 1;
+  }
+
+  var result = {
+    list: dataSource,
+    pagination: {
+      total: dataSource.length,
+      pageSize: pageSize,
+      current: parseInt(params.currentPage, 10) || 1
+    }
+  };
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+function postRule(req, res, u, b) {
+  var url = u;
+
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+
+  var body = b && b.body || req.body;
+  var method = body.method,
+      name = body.name,
+      desc = body.desc,
+      key = body.key;
+
+  switch (method) {
+    /* eslint no-case-declarations:0 */
+    case 'delete':
+      tableListDataSource = tableListDataSource.filter(function (item) {
+        return key.indexOf(item.key) === -1;
+      });
+      break;
+
+    case 'post':
+      var _i = Math.ceil(Math.random() * 10000);
+
+      tableListDataSource.unshift({
+        key: _i,
+        href: 'https://ant.design',
+        avatar: ['https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png', 'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png'][_i % 2],
+        name: "TradeCode ".concat(_i),
+        title: "\u4E00\u4E2A\u4EFB\u52A1\u540D\u79F0 ".concat(_i),
+        owner: '曲丽丽',
+        desc: desc,
+        callNo: Math.floor(Math.random() * 1000),
+        status: Math.floor(Math.random() * 10) % 2,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        progress: Math.ceil(Math.random() * 100)
+      });
+      break;
+
+    case 'update':
+      tableListDataSource = tableListDataSource.map(function (item) {
+        if (item.key === key) {
+          return _objectSpread({}, item, {
+            desc: desc,
+            name: name
+          });
+        }
+
+        return item;
+      });
+      break;
+
+    default:
+      break;
+  }
+
+  var result = {
+    list: tableListDataSource,
+    pagination: {
+      total: tableListDataSource.length
+    }
+  };
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+  getRule: getRule,
+  postRule: postRule
+});
 
 /***/ }),
 
@@ -4085,6 +4806,98 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	}
 
 	return to;
+};
+
+
+/***/ }),
+
+/***/ "J6GP":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
 
@@ -5614,6 +6427,746 @@ var freeSelf = typeof self == 'object' && self && self.Object === Object && self
 var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
+
+
+/***/ }),
+
+/***/ "Mej7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var punycode = __webpack_require__("FIMm");
+var util = __webpack_require__("5YsI");
+
+exports.parse = urlParse;
+exports.resolve = urlResolve;
+exports.resolveObject = urlResolveObject;
+exports.format = urlFormat;
+
+exports.Url = Url;
+
+function Url() {
+  this.protocol = null;
+  this.slashes = null;
+  this.auth = null;
+  this.host = null;
+  this.port = null;
+  this.hostname = null;
+  this.hash = null;
+  this.search = null;
+  this.query = null;
+  this.pathname = null;
+  this.path = null;
+  this.href = null;
+}
+
+// Reference: RFC 3986, RFC 1808, RFC 2396
+
+// define these here so at least they only have to be
+// compiled once on the first module load.
+var protocolPattern = /^([a-z0-9.+-]+:)/i,
+    portPattern = /:[0-9]*$/,
+
+    // Special case for a simple path URL
+    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
+
+    // RFC 2396: characters reserved for delimiting URLs.
+    // We actually just auto-escape these.
+    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
+
+    // RFC 2396: characters not allowed for various reasons.
+    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
+
+    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
+    autoEscape = ['\''].concat(unwise),
+    // Characters that are never ever allowed in a hostname.
+    // Note that any invalid chars are also handled, but these
+    // are the ones that are *expected* to be seen, so we fast-path
+    // them.
+    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
+    hostEndingChars = ['/', '?', '#'],
+    hostnameMaxLen = 255,
+    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
+    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
+    // protocols that can allow "unsafe" and "unwise" chars.
+    unsafeProtocol = {
+      'javascript': true,
+      'javascript:': true
+    },
+    // protocols that never have a hostname.
+    hostlessProtocol = {
+      'javascript': true,
+      'javascript:': true
+    },
+    // protocols that always contain a // bit.
+    slashedProtocol = {
+      'http': true,
+      'https': true,
+      'ftp': true,
+      'gopher': true,
+      'file': true,
+      'http:': true,
+      'https:': true,
+      'ftp:': true,
+      'gopher:': true,
+      'file:': true
+    },
+    querystring = __webpack_require__("+00f");
+
+function urlParse(url, parseQueryString, slashesDenoteHost) {
+  if (url && util.isObject(url) && url instanceof Url) return url;
+
+  var u = new Url;
+  u.parse(url, parseQueryString, slashesDenoteHost);
+  return u;
+}
+
+Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+  if (!util.isString(url)) {
+    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
+  }
+
+  // Copy chrome, IE, opera backslash-handling behavior.
+  // Back slashes before the query string get converted to forward slashes
+  // See: https://code.google.com/p/chromium/issues/detail?id=25916
+  var queryIndex = url.indexOf('?'),
+      splitter =
+          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+      uSplit = url.split(splitter),
+      slashRegex = /\\/g;
+  uSplit[0] = uSplit[0].replace(slashRegex, '/');
+  url = uSplit.join(splitter);
+
+  var rest = url;
+
+  // trim before proceeding.
+  // This is to support parse stuff like "  http://foo.com  \n"
+  rest = rest.trim();
+
+  if (!slashesDenoteHost && url.split('#').length === 1) {
+    // Try fast path regexp
+    var simplePath = simplePathPattern.exec(rest);
+    if (simplePath) {
+      this.path = rest;
+      this.href = rest;
+      this.pathname = simplePath[1];
+      if (simplePath[2]) {
+        this.search = simplePath[2];
+        if (parseQueryString) {
+          this.query = querystring.parse(this.search.substr(1));
+        } else {
+          this.query = this.search.substr(1);
+        }
+      } else if (parseQueryString) {
+        this.search = '';
+        this.query = {};
+      }
+      return this;
+    }
+  }
+
+  var proto = protocolPattern.exec(rest);
+  if (proto) {
+    proto = proto[0];
+    var lowerProto = proto.toLowerCase();
+    this.protocol = lowerProto;
+    rest = rest.substr(proto.length);
+  }
+
+  // figure out if it's got a host
+  // user@server is *always* interpreted as a hostname, and url
+  // resolution will treat //foo/bar as host=foo,path=bar because that's
+  // how the browser resolves relative URLs.
+  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+    var slashes = rest.substr(0, 2) === '//';
+    if (slashes && !(proto && hostlessProtocol[proto])) {
+      rest = rest.substr(2);
+      this.slashes = true;
+    }
+  }
+
+  if (!hostlessProtocol[proto] &&
+      (slashes || (proto && !slashedProtocol[proto]))) {
+
+    // there's a hostname.
+    // the first instance of /, ?, ;, or # ends the host.
+    //
+    // If there is an @ in the hostname, then non-host chars *are* allowed
+    // to the left of the last @ sign, unless some host-ending character
+    // comes *before* the @-sign.
+    // URLs are obnoxious.
+    //
+    // ex:
+    // http://a@b@c/ => user:a@b host:c
+    // http://a@b?@c => user:a host:c path:/?@c
+
+    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+    // Review our test case against browsers more comprehensively.
+
+    // find the first instance of any hostEndingChars
+    var hostEnd = -1;
+    for (var i = 0; i < hostEndingChars.length; i++) {
+      var hec = rest.indexOf(hostEndingChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+
+    // at this point, either we have an explicit point where the
+    // auth portion cannot go past, or the last @ char is the decider.
+    var auth, atSign;
+    if (hostEnd === -1) {
+      // atSign can be anywhere.
+      atSign = rest.lastIndexOf('@');
+    } else {
+      // atSign must be in auth portion.
+      // http://a@b/c@d => host:b auth:a path:/c@d
+      atSign = rest.lastIndexOf('@', hostEnd);
+    }
+
+    // Now we have a portion which is definitely the auth.
+    // Pull that off.
+    if (atSign !== -1) {
+      auth = rest.slice(0, atSign);
+      rest = rest.slice(atSign + 1);
+      this.auth = decodeURIComponent(auth);
+    }
+
+    // the host is the remaining to the left of the first non-host char
+    hostEnd = -1;
+    for (var i = 0; i < nonHostChars.length; i++) {
+      var hec = rest.indexOf(nonHostChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+    // if we still have not hit it, then the entire thing is a host.
+    if (hostEnd === -1)
+      hostEnd = rest.length;
+
+    this.host = rest.slice(0, hostEnd);
+    rest = rest.slice(hostEnd);
+
+    // pull out port.
+    this.parseHost();
+
+    // we've indicated that there is a hostname,
+    // so even if it's empty, it has to be present.
+    this.hostname = this.hostname || '';
+
+    // if hostname begins with [ and ends with ]
+    // assume that it's an IPv6 address.
+    var ipv6Hostname = this.hostname[0] === '[' &&
+        this.hostname[this.hostname.length - 1] === ']';
+
+    // validate a little.
+    if (!ipv6Hostname) {
+      var hostparts = this.hostname.split(/\./);
+      for (var i = 0, l = hostparts.length; i < l; i++) {
+        var part = hostparts[i];
+        if (!part) continue;
+        if (!part.match(hostnamePartPattern)) {
+          var newpart = '';
+          for (var j = 0, k = part.length; j < k; j++) {
+            if (part.charCodeAt(j) > 127) {
+              // we replace non-ASCII char with a temporary placeholder
+              // we need this to make sure size of hostname is not
+              // broken by replacing non-ASCII by nothing
+              newpart += 'x';
+            } else {
+              newpart += part[j];
+            }
+          }
+          // we test again with ASCII char only
+          if (!newpart.match(hostnamePartPattern)) {
+            var validParts = hostparts.slice(0, i);
+            var notHost = hostparts.slice(i + 1);
+            var bit = part.match(hostnamePartStart);
+            if (bit) {
+              validParts.push(bit[1]);
+              notHost.unshift(bit[2]);
+            }
+            if (notHost.length) {
+              rest = '/' + notHost.join('.') + rest;
+            }
+            this.hostname = validParts.join('.');
+            break;
+          }
+        }
+      }
+    }
+
+    if (this.hostname.length > hostnameMaxLen) {
+      this.hostname = '';
+    } else {
+      // hostnames are always lower case.
+      this.hostname = this.hostname.toLowerCase();
+    }
+
+    if (!ipv6Hostname) {
+      // IDNA Support: Returns a punycoded representation of "domain".
+      // It only converts parts of the domain name that
+      // have non-ASCII characters, i.e. it doesn't matter if
+      // you call it with a domain that already is ASCII-only.
+      this.hostname = punycode.toASCII(this.hostname);
+    }
+
+    var p = this.port ? ':' + this.port : '';
+    var h = this.hostname || '';
+    this.host = h + p;
+    this.href += this.host;
+
+    // strip [ and ] from the hostname
+    // the host field still retains them, though
+    if (ipv6Hostname) {
+      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
+      if (rest[0] !== '/') {
+        rest = '/' + rest;
+      }
+    }
+  }
+
+  // now rest is set to the post-host stuff.
+  // chop off any delim chars.
+  if (!unsafeProtocol[lowerProto]) {
+
+    // First, make 100% sure that any "autoEscape" chars get
+    // escaped, even if encodeURIComponent doesn't think they
+    // need to be.
+    for (var i = 0, l = autoEscape.length; i < l; i++) {
+      var ae = autoEscape[i];
+      if (rest.indexOf(ae) === -1)
+        continue;
+      var esc = encodeURIComponent(ae);
+      if (esc === ae) {
+        esc = escape(ae);
+      }
+      rest = rest.split(ae).join(esc);
+    }
+  }
+
+
+  // chop off from the tail first.
+  var hash = rest.indexOf('#');
+  if (hash !== -1) {
+    // got a fragment string.
+    this.hash = rest.substr(hash);
+    rest = rest.slice(0, hash);
+  }
+  var qm = rest.indexOf('?');
+  if (qm !== -1) {
+    this.search = rest.substr(qm);
+    this.query = rest.substr(qm + 1);
+    if (parseQueryString) {
+      this.query = querystring.parse(this.query);
+    }
+    rest = rest.slice(0, qm);
+  } else if (parseQueryString) {
+    // no query string, but parseQueryString still requested
+    this.search = '';
+    this.query = {};
+  }
+  if (rest) this.pathname = rest;
+  if (slashedProtocol[lowerProto] &&
+      this.hostname && !this.pathname) {
+    this.pathname = '/';
+  }
+
+  //to support http.request
+  if (this.pathname || this.search) {
+    var p = this.pathname || '';
+    var s = this.search || '';
+    this.path = p + s;
+  }
+
+  // finally, reconstruct the href based on what has been validated.
+  this.href = this.format();
+  return this;
+};
+
+// format a parsed object into a url string
+function urlFormat(obj) {
+  // ensure it's an object, and not a string url.
+  // If it's an obj, this is a no-op.
+  // this way, you can call url_format() on strings
+  // to clean up potentially wonky urls.
+  if (util.isString(obj)) obj = urlParse(obj);
+  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+  return obj.format();
+}
+
+Url.prototype.format = function() {
+  var auth = this.auth || '';
+  if (auth) {
+    auth = encodeURIComponent(auth);
+    auth = auth.replace(/%3A/i, ':');
+    auth += '@';
+  }
+
+  var protocol = this.protocol || '',
+      pathname = this.pathname || '',
+      hash = this.hash || '',
+      host = false,
+      query = '';
+
+  if (this.host) {
+    host = auth + this.host;
+  } else if (this.hostname) {
+    host = auth + (this.hostname.indexOf(':') === -1 ?
+        this.hostname :
+        '[' + this.hostname + ']');
+    if (this.port) {
+      host += ':' + this.port;
+    }
+  }
+
+  if (this.query &&
+      util.isObject(this.query) &&
+      Object.keys(this.query).length) {
+    query = querystring.stringify(this.query);
+  }
+
+  var search = this.search || (query && ('?' + query)) || '';
+
+  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+
+  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+  // unless they had them to begin with.
+  if (this.slashes ||
+      (!protocol || slashedProtocol[protocol]) && host !== false) {
+    host = '//' + (host || '');
+    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
+  } else if (!host) {
+    host = '';
+  }
+
+  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
+  if (search && search.charAt(0) !== '?') search = '?' + search;
+
+  pathname = pathname.replace(/[?#]/g, function(match) {
+    return encodeURIComponent(match);
+  });
+  search = search.replace('#', '%23');
+
+  return protocol + host + pathname + search + hash;
+};
+
+function urlResolve(source, relative) {
+  return urlParse(source, false, true).resolve(relative);
+}
+
+Url.prototype.resolve = function(relative) {
+  return this.resolveObject(urlParse(relative, false, true)).format();
+};
+
+function urlResolveObject(source, relative) {
+  if (!source) return relative;
+  return urlParse(source, false, true).resolveObject(relative);
+}
+
+Url.prototype.resolveObject = function(relative) {
+  if (util.isString(relative)) {
+    var rel = new Url();
+    rel.parse(relative, false, true);
+    relative = rel;
+  }
+
+  var result = new Url();
+  var tkeys = Object.keys(this);
+  for (var tk = 0; tk < tkeys.length; tk++) {
+    var tkey = tkeys[tk];
+    result[tkey] = this[tkey];
+  }
+
+  // hash is always overridden, no matter what.
+  // even href="" will remove it.
+  result.hash = relative.hash;
+
+  // if the relative url is empty, then there's nothing left to do here.
+  if (relative.href === '') {
+    result.href = result.format();
+    return result;
+  }
+
+  // hrefs like //foo/bar always cut to the protocol.
+  if (relative.slashes && !relative.protocol) {
+    // take everything except the protocol from relative
+    var rkeys = Object.keys(relative);
+    for (var rk = 0; rk < rkeys.length; rk++) {
+      var rkey = rkeys[rk];
+      if (rkey !== 'protocol')
+        result[rkey] = relative[rkey];
+    }
+
+    //urlParse appends trailing / to urls like http://www.example.com
+    if (slashedProtocol[result.protocol] &&
+        result.hostname && !result.pathname) {
+      result.path = result.pathname = '/';
+    }
+
+    result.href = result.format();
+    return result;
+  }
+
+  if (relative.protocol && relative.protocol !== result.protocol) {
+    // if it's a known url protocol, then changing
+    // the protocol does weird things
+    // first, if it's not file:, then we MUST have a host,
+    // and if there was a path
+    // to begin with, then we MUST have a path.
+    // if it is file:, then the host is dropped,
+    // because that's known to be hostless.
+    // anything else is assumed to be absolute.
+    if (!slashedProtocol[relative.protocol]) {
+      var keys = Object.keys(relative);
+      for (var v = 0; v < keys.length; v++) {
+        var k = keys[v];
+        result[k] = relative[k];
+      }
+      result.href = result.format();
+      return result;
+    }
+
+    result.protocol = relative.protocol;
+    if (!relative.host && !hostlessProtocol[relative.protocol]) {
+      var relPath = (relative.pathname || '').split('/');
+      while (relPath.length && !(relative.host = relPath.shift()));
+      if (!relative.host) relative.host = '';
+      if (!relative.hostname) relative.hostname = '';
+      if (relPath[0] !== '') relPath.unshift('');
+      if (relPath.length < 2) relPath.unshift('');
+      result.pathname = relPath.join('/');
+    } else {
+      result.pathname = relative.pathname;
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    result.host = relative.host || '';
+    result.auth = relative.auth;
+    result.hostname = relative.hostname || relative.host;
+    result.port = relative.port;
+    // to support http.request
+    if (result.pathname || result.search) {
+      var p = result.pathname || '';
+      var s = result.search || '';
+      result.path = p + s;
+    }
+    result.slashes = result.slashes || relative.slashes;
+    result.href = result.format();
+    return result;
+  }
+
+  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
+      isRelAbs = (
+          relative.host ||
+          relative.pathname && relative.pathname.charAt(0) === '/'
+      ),
+      mustEndAbs = (isRelAbs || isSourceAbs ||
+                    (result.host && relative.pathname)),
+      removeAllDots = mustEndAbs,
+      srcPath = result.pathname && result.pathname.split('/') || [],
+      relPath = relative.pathname && relative.pathname.split('/') || [],
+      psychotic = result.protocol && !slashedProtocol[result.protocol];
+
+  // if the url is a non-slashed url, then relative
+  // links like ../.. should be able
+  // to crawl up to the hostname, as well.  This is strange.
+  // result.protocol has already been set by now.
+  // Later on, put the first path part into the host field.
+  if (psychotic) {
+    result.hostname = '';
+    result.port = null;
+    if (result.host) {
+      if (srcPath[0] === '') srcPath[0] = result.host;
+      else srcPath.unshift(result.host);
+    }
+    result.host = '';
+    if (relative.protocol) {
+      relative.hostname = null;
+      relative.port = null;
+      if (relative.host) {
+        if (relPath[0] === '') relPath[0] = relative.host;
+        else relPath.unshift(relative.host);
+      }
+      relative.host = null;
+    }
+    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+  }
+
+  if (isRelAbs) {
+    // it's absolute.
+    result.host = (relative.host || relative.host === '') ?
+                  relative.host : result.host;
+    result.hostname = (relative.hostname || relative.hostname === '') ?
+                      relative.hostname : result.hostname;
+    result.search = relative.search;
+    result.query = relative.query;
+    srcPath = relPath;
+    // fall through to the dot-handling below.
+  } else if (relPath.length) {
+    // it's relative
+    // throw away the existing file, and take the new path instead.
+    if (!srcPath) srcPath = [];
+    srcPath.pop();
+    srcPath = srcPath.concat(relPath);
+    result.search = relative.search;
+    result.query = relative.query;
+  } else if (!util.isNullOrUndefined(relative.search)) {
+    // just pull out the search.
+    // like href='?foo'.
+    // Put this after the other two cases because it simplifies the booleans
+    if (psychotic) {
+      result.hostname = result.host = srcPath.shift();
+      //occationaly the auth can get stuck only in host
+      //this especially happens in cases like
+      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                       result.host.split('@') : false;
+      if (authInHost) {
+        result.auth = authInHost.shift();
+        result.host = result.hostname = authInHost.shift();
+      }
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    //to support http.request
+    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+      result.path = (result.pathname ? result.pathname : '') +
+                    (result.search ? result.search : '');
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  if (!srcPath.length) {
+    // no path at all.  easy.
+    // we've already handled the other stuff above.
+    result.pathname = null;
+    //to support http.request
+    if (result.search) {
+      result.path = '/' + result.search;
+    } else {
+      result.path = null;
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  // if a url ENDs in . or .., then it must get a trailing slash.
+  // however, if it ends in anything else non-slashy,
+  // then it must NOT get a trailing slash.
+  var last = srcPath.slice(-1)[0];
+  var hasTrailingSlash = (
+      (result.host || relative.host || srcPath.length > 1) &&
+      (last === '.' || last === '..') || last === '');
+
+  // strip single dots, resolve double dots to parent dir
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = srcPath.length; i >= 0; i--) {
+    last = srcPath[i];
+    if (last === '.') {
+      srcPath.splice(i, 1);
+    } else if (last === '..') {
+      srcPath.splice(i, 1);
+      up++;
+    } else if (up) {
+      srcPath.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (!mustEndAbs && !removeAllDots) {
+    for (; up--; up) {
+      srcPath.unshift('..');
+    }
+  }
+
+  if (mustEndAbs && srcPath[0] !== '' &&
+      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
+    srcPath.unshift('');
+  }
+
+  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+    srcPath.push('');
+  }
+
+  var isAbsolute = srcPath[0] === '' ||
+      (srcPath[0] && srcPath[0].charAt(0) === '/');
+
+  // put the host back
+  if (psychotic) {
+    result.hostname = result.host = isAbsolute ? '' :
+                                    srcPath.length ? srcPath.shift() : '';
+    //occationaly the auth can get stuck only in host
+    //this especially happens in cases like
+    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                     result.host.split('@') : false;
+    if (authInHost) {
+      result.auth = authInHost.shift();
+      result.host = result.hostname = authInHost.shift();
+    }
+  }
+
+  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
+
+  if (mustEndAbs && !isAbsolute) {
+    srcPath.unshift('');
+  }
+
+  if (!srcPath.length) {
+    result.pathname = null;
+    result.path = null;
+  } else {
+    result.pathname = srcPath.join('/');
+  }
+
+  //to support request.http
+  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+    result.path = (result.pathname ? result.pathname : '') +
+                  (result.search ? result.search : '');
+  }
+  result.auth = relative.auth || result.auth;
+  result.slashes = result.slashes || relative.slashes;
+  result.href = result.format();
+  return result;
+};
+
+Url.prototype.parseHost = function() {
+  var host = this.host;
+  var port = portPattern.exec(host);
+  if (port) {
+    port = port[0];
+    if (port !== ':') {
+      this.port = port.substr(1);
+    }
+    host = host.substr(0, host.length - port.length);
+  }
+  if (host) this.hostname = host;
+};
 
 
 /***/ }),
@@ -7795,169 +9348,138 @@ module.exports = hashHas;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const basicGoods = [
-  {
-    id: '1234561',
-    name: '矿泉水 550ml',
-    barcode: '12421432143214321',
-    price: '2.00',
-    num: '1',
-    amount: '2.00',
-  },
-  {
-    id: '1234562',
-    name: '凉茶 300ml',
-    barcode: '12421432143214322',
-    price: '3.00',
-    num: '2',
-    amount: '6.00',
-  },
-  {
-    id: '1234563',
-    name: '好吃的薯片',
-    barcode: '12421432143214323',
-    price: '7.00',
-    num: '4',
-    amount: '28.00',
-  },
-  {
-    id: '1234564',
-    name: '特别好吃的蛋卷',
-    barcode: '12421432143214324',
-    price: '8.50',
-    num: '3',
-    amount: '25.50',
-  },
-];
-
-const basicProgress = [
-  {
-    key: '1',
-    time: '2017-10-01 14:10',
-    rate: '联系客户',
-    status: 'processing',
-    operator: '取货员 ID1234',
-    cost: '5mins',
-  },
-  {
-    key: '2',
-    time: '2017-10-01 14:05',
-    rate: '取货员出发',
-    status: 'success',
-    operator: '取货员 ID1234',
-    cost: '1h',
-  },
-  {
-    key: '3',
-    time: '2017-10-01 13:05',
-    rate: '取货员接单',
-    status: 'success',
-    operator: '取货员 ID1234',
-    cost: '5mins',
-  },
-  {
-    key: '4',
-    time: '2017-10-01 13:00',
-    rate: '申请审批通过',
-    status: 'success',
-    operator: '系统',
-    cost: '1h',
-  },
-  {
-    key: '5',
-    time: '2017-10-01 12:00',
-    rate: '发起退货申请',
-    status: 'success',
-    operator: '用户',
-    cost: '5mins',
-  },
-];
-
-const advancedOperation1 = [
-  {
-    key: 'op1',
-    type: '订购关系生效',
-    name: '曲丽丽',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '-',
-  },
-  {
-    key: 'op2',
-    type: '财务复审',
-    name: '付小小',
-    status: 'reject',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '不通过原因',
-  },
-  {
-    key: 'op3',
-    type: '部门初审',
-    name: '周毛毛',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '-',
-  },
-  {
-    key: 'op4',
-    type: '提交订单',
-    name: '林东东',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '很棒',
-  },
-  {
-    key: 'op5',
-    type: '创建订单',
-    name: '汗牙牙',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '-',
-  },
-];
-
-const advancedOperation2 = [
-  {
-    key: 'op1',
-    type: '订购关系生效',
-    name: '曲丽丽',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '-',
-  },
-];
-
-const advancedOperation3 = [
-  {
-    key: 'op1',
-    type: '创建订单',
-    name: '汗牙牙',
-    status: 'agree',
-    updatedAt: '2017-10-03  19:23:12',
-    memo: '-',
-  },
-];
-
-const getProfileBasicData = {
-  basicGoods,
-  basicProgress,
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getProfileBasicData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getProfileAdvancedData; });
+var basicGoods = [{
+  id: '1234561',
+  name: '矿泉水 550ml',
+  barcode: '12421432143214321',
+  price: '2.00',
+  num: '1',
+  amount: '2.00'
+}, {
+  id: '1234562',
+  name: '凉茶 300ml',
+  barcode: '12421432143214322',
+  price: '3.00',
+  num: '2',
+  amount: '6.00'
+}, {
+  id: '1234563',
+  name: '好吃的薯片',
+  barcode: '12421432143214323',
+  price: '7.00',
+  num: '4',
+  amount: '28.00'
+}, {
+  id: '1234564',
+  name: '特别好吃的蛋卷',
+  barcode: '12421432143214324',
+  price: '8.50',
+  num: '3',
+  amount: '25.50'
+}];
+var basicProgress = [{
+  key: '1',
+  time: '2017-10-01 14:10',
+  rate: '联系客户',
+  status: 'processing',
+  operator: '取货员 ID1234',
+  cost: '5mins'
+}, {
+  key: '2',
+  time: '2017-10-01 14:05',
+  rate: '取货员出发',
+  status: 'success',
+  operator: '取货员 ID1234',
+  cost: '1h'
+}, {
+  key: '3',
+  time: '2017-10-01 13:05',
+  rate: '取货员接单',
+  status: 'success',
+  operator: '取货员 ID1234',
+  cost: '5mins'
+}, {
+  key: '4',
+  time: '2017-10-01 13:00',
+  rate: '申请审批通过',
+  status: 'success',
+  operator: '系统',
+  cost: '1h'
+}, {
+  key: '5',
+  time: '2017-10-01 12:00',
+  rate: '发起退货申请',
+  status: 'success',
+  operator: '用户',
+  cost: '5mins'
+}];
+var advancedOperation1 = [{
+  key: 'op1',
+  type: '订购关系生效',
+  name: '曲丽丽',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '-'
+}, {
+  key: 'op2',
+  type: '财务复审',
+  name: '付小小',
+  status: 'reject',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '不通过原因'
+}, {
+  key: 'op3',
+  type: '部门初审',
+  name: '周毛毛',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '-'
+}, {
+  key: 'op4',
+  type: '提交订单',
+  name: '林东东',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '很棒'
+}, {
+  key: 'op5',
+  type: '创建订单',
+  name: '汗牙牙',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '-'
+}];
+var advancedOperation2 = [{
+  key: 'op1',
+  type: '订购关系生效',
+  name: '曲丽丽',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '-'
+}];
+var advancedOperation3 = [{
+  key: 'op1',
+  type: '创建订单',
+  name: '汗牙牙',
+  status: 'agree',
+  updatedAt: '2017-10-03  19:23:12',
+  memo: '-'
+}];
+var getProfileBasicData = {
+  basicGoods: basicGoods,
+  basicProgress: basicProgress
 };
-/* harmony export (immutable) */ __webpack_exports__["b"] = getProfileBasicData;
-
-
-const getProfileAdvancedData = {
-  advancedOperation1,
-  advancedOperation2,
-  advancedOperation3,
+var getProfileAdvancedData = {
+  advancedOperation1: advancedOperation1,
+  advancedOperation2: advancedOperation2,
+  advancedOperation3: advancedOperation3
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = getProfileAdvancedData;
-
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({
-  getProfileBasicData,
-  getProfileAdvancedData,
+  getProfileBasicData: getProfileBasicData,
+  getProfileAdvancedData: getProfileAdvancedData
 });
-
 
 /***/ }),
 
@@ -8020,108 +9542,93 @@ module.exports = function (it) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const getNotices = (req, res) => {
-  res.json([
-    {
-      id: '000000001',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-      title: '你收到了 14 份新周报',
-      datetime: '2017-08-09',
-      type: '通知',
-    },
-    {
-      id: '000000002',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
-      title: '你推荐的 曲妮妮 已通过第三轮面试',
-      datetime: '2017-08-08',
-      type: '通知',
-    },
-    {
-      id: '000000003',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png',
-      title: '这种模板可以区分多种通知类型',
-      datetime: '2017-08-07',
-      read: true,
-      type: '通知',
-    },
-    {
-      id: '000000004',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
-      title: '左侧图标用于区分不同的类型',
-      datetime: '2017-08-07',
-      type: '通知',
-    },
-    {
-      id: '000000005',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
-      title: '内容不要超过两行字，超出时自动截断',
-      datetime: '2017-08-07',
-      type: '通知',
-    },
-    {
-      id: '000000006',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '曲丽丽 评论了你',
-      description: '描述信息描述信息描述信息',
-      datetime: '2017-08-07',
-      type: '消息',
-    },
-    {
-      id: '000000007',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '朱偏右 回复了你',
-      description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
-      datetime: '2017-08-07',
-      type: '消息',
-    },
-    {
-      id: '000000008',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-      title: '标题',
-      description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
-      datetime: '2017-08-07',
-      type: '消息',
-    },
-    {
-      id: '000000009',
-      title: '任务名称',
-      description: '任务需要在 2017-01-12 20:00 前启动',
-      extra: '未开始',
-      status: 'todo',
-      type: '待办',
-    },
-    {
-      id: '000000010',
-      title: '第三方紧急代码变更',
-      description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
-      extra: '马上到期',
-      status: 'urgent',
-      type: '待办',
-    },
-    {
-      id: '000000011',
-      title: '信息安全考试',
-      description: '指派竹尔于 2017-01-09 前完成更新并发布',
-      extra: '已耗时 8 天',
-      status: 'doing',
-      type: '待办',
-    },
-    {
-      id: '000000012',
-      title: 'ABCD 版本发布',
-      description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
-      extra: '进行中',
-      status: 'processing',
-      type: '待办',
-    },
-  ]);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getNotices; });
+var getNotices = function getNotices(req, res) {
+  res.json([{
+    id: '000000001',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+    title: '你收到了 14 份新周报',
+    datetime: '2017-08-09',
+    type: '通知'
+  }, {
+    id: '000000002',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+    title: '你推荐的 曲妮妮 已通过第三轮面试',
+    datetime: '2017-08-08',
+    type: '通知'
+  }, {
+    id: '000000003',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png',
+    title: '这种模板可以区分多种通知类型',
+    datetime: '2017-08-07',
+    read: true,
+    type: '通知'
+  }, {
+    id: '000000004',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
+    title: '左侧图标用于区分不同的类型',
+    datetime: '2017-08-07',
+    type: '通知'
+  }, {
+    id: '000000005',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+    title: '内容不要超过两行字，超出时自动截断',
+    datetime: '2017-08-07',
+    type: '通知'
+  }, {
+    id: '000000006',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
+    title: '曲丽丽 评论了你',
+    description: '描述信息描述信息描述信息',
+    datetime: '2017-08-07',
+    type: '消息'
+  }, {
+    id: '000000007',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
+    title: '朱偏右 回复了你',
+    description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
+    datetime: '2017-08-07',
+    type: '消息'
+  }, {
+    id: '000000008',
+    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
+    title: '标题',
+    description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
+    datetime: '2017-08-07',
+    type: '消息'
+  }, {
+    id: '000000009',
+    title: '任务名称',
+    description: '任务需要在 2017-01-12 20:00 前启动',
+    extra: '未开始',
+    status: 'todo',
+    type: '待办'
+  }, {
+    id: '000000010',
+    title: '第三方紧急代码变更',
+    description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
+    extra: '马上到期',
+    status: 'urgent',
+    type: '待办'
+  }, {
+    id: '000000011',
+    title: '信息安全考试',
+    description: '指派竹尔于 2017-01-09 前完成更新并发布',
+    extra: '已耗时 8 天',
+    status: 'doing',
+    type: '待办'
+  }, {
+    id: '000000012',
+    title: 'ABCD 版本发布',
+    description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
+    extra: '进行中',
+    status: 'processing',
+    type: '待办'
+  }]);
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = getNotices;
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({
-  getNotices,
+  getNotices: getNotices
 });
-
 
 /***/ }),
 
@@ -12946,6 +14453,99 @@ function _setPrototypeOf(o, p) {
 }
 
 module.exports = _setPrototypeOf;
+
+/***/ }),
+
+/***/ "bvhO":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
 
 /***/ }),
 
@@ -23724,9 +25324,293 @@ module.exports = __webpack_require__("eOjq");
 /***/ }),
 
 /***/ "mCGg":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module parse failed: Unexpected token (130:22)\nYou may need an appropriate loader to handle this file type.\n|   const { /* url = '', */ body } = req;\n|   // const params = getUrlParams(url);\n|   const { method, id, ...restParams } = body;\n| \n|   // const count = (params.count * 1) || 20;");
+"use strict";
+/* unused harmony export fakeList */
+/* harmony export (immutable) */ __webpack_exports__["c"] = getFakeList;
+/* harmony export (immutable) */ __webpack_exports__["e"] = postFakeList;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getNotice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getActivities; });
+/* harmony export (immutable) */ __webpack_exports__["b"] = getFakeCaptcha;
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+var titles = ['Alipay', 'Angular', 'Ant Design', 'Ant Design Pro', 'Bootstrap', 'React', 'Vue', 'Webpack'];
+var avatars = ['https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
+'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
+'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png', // Ant Design
+'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Ant Design Pro
+'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png', // Bootstrap
+'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
+'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
+'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png'];
+var avatars2 = ['https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png', 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png', 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png', 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png', 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png', 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png', 'https://gw.alipayobjects.com/zos/rmsportal/psOgztMplJMGpVEqfcgF.png', 'https://gw.alipayobjects.com/zos/rmsportal/ZpBqSxLxVEXfcUNoPKrz.png', 'https://gw.alipayobjects.com/zos/rmsportal/laiEnJdGHVOhJrUShBaJ.png', 'https://gw.alipayobjects.com/zos/rmsportal/UrQsqscbKEpNuJcvBZBu.png'];
+var covers = ['https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png', 'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png', 'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png', 'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png'];
+var desc = ['那是一种内在的东西， 他们到达不了，也无法触及的', '希望是一个好东西，也许是最好的，好东西是不会消亡的', '生命就像一盒巧克力，结果往往出人意料', '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆', '那时候我只会想自己想要什么，从不想自己拥有什么'];
+var user = ['付小小', '曲丽丽', '林东东', '周星星', '吴加好', '朱偏右', '鱼酱', '乐哥', '谭小仪', '仲尼'];
+function fakeList(count) {
+  var list = [];
+
+  for (var i = 0; i < count; i += 1) {
+    list.push({
+      id: "fake-list-".concat(i),
+      owner: user[i % 10],
+      title: titles[i % 8],
+      avatar: avatars[i % 8],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
+      status: ['active', 'exception', 'normal'][i % 3],
+      percent: Math.ceil(Math.random() * 50) + 50,
+      logo: avatars[i % 8],
+      href: 'https://ant.design',
+      updatedAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i),
+      createdAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i),
+      subDescription: desc[i % 5],
+      description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+      activeUser: Math.ceil(Math.random() * 100000) + 100000,
+      newUser: Math.ceil(Math.random() * 1000) + 1000,
+      star: Math.ceil(Math.random() * 100) + 100,
+      like: Math.ceil(Math.random() * 100) + 100,
+      message: Math.ceil(Math.random() * 10) + 10,
+      content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+      members: [{
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
+        name: '曲丽丽',
+        id: 'member1'
+      }, {
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
+        name: '王昭君',
+        id: 'member2'
+      }, {
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
+        name: '董娜娜',
+        id: 'member3'
+      }]
+    });
+  }
+
+  return list;
+}
+var sourceData;
+function getFakeList(req, res) {
+  var params = req.query;
+  var count = params.count * 1 || 20;
+  var result = fakeList(count);
+  sourceData = result;
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+function postFakeList(req, res) {
+  var body = req.body; // const params = getUrlParams(url);
+
+  var method = body.method,
+      id = body.id,
+      restParams = _objectWithoutProperties(body, ["method", "id"]); // const count = (params.count * 1) || 20;
+
+
+  var result = sourceData;
+
+  switch (method) {
+    case 'delete':
+      result = result.filter(function (item) {
+        return item.id !== id;
+      });
+      break;
+
+    case 'update':
+      result.forEach(function (item, i) {
+        if (item.id === id) {
+          result[i] = Object.assign(item, restParams);
+        }
+      });
+      break;
+
+    case 'post':
+      result.unshift(_objectSpread({}, restParams, {
+        id: "fake-list-".concat(result.length),
+        createdAt: new Date().getTime()
+      }));
+      break;
+
+    default:
+      break;
+  }
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+var getNotice = [{
+  id: 'xxx1',
+  title: titles[0],
+  logo: avatars[0],
+  description: '那是一种内在的东西，他们到达不了，也无法触及的',
+  updatedAt: new Date(),
+  member: '科学搬砖组',
+  href: '',
+  memberLink: ''
+}, {
+  id: 'xxx2',
+  title: titles[1],
+  logo: avatars[1],
+  description: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
+  updatedAt: new Date('2017-07-24'),
+  member: '全组都是吴彦祖',
+  href: '',
+  memberLink: ''
+}, {
+  id: 'xxx3',
+  title: titles[2],
+  logo: avatars[2],
+  description: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
+  updatedAt: new Date(),
+  member: '中二少女团',
+  href: '',
+  memberLink: ''
+}, {
+  id: 'xxx4',
+  title: titles[3],
+  logo: avatars[3],
+  description: '那时候我只会想自己想要什么，从不想自己拥有什么',
+  updatedAt: new Date('2017-07-23'),
+  member: '程序员日常',
+  href: '',
+  memberLink: ''
+}, {
+  id: 'xxx5',
+  title: titles[4],
+  logo: avatars[4],
+  description: '凛冬将至',
+  updatedAt: new Date('2017-07-23'),
+  member: '高逼格设计天团',
+  href: '',
+  memberLink: ''
+}, {
+  id: 'xxx6',
+  title: titles[5],
+  logo: avatars[5],
+  description: '生命就像一盒巧克力，结果往往出人意料',
+  updatedAt: new Date('2017-07-23'),
+  member: '骗你来学计算机',
+  href: '',
+  memberLink: ''
+}];
+var getActivities = [{
+  id: 'trend-1',
+  updatedAt: new Date(),
+  user: {
+    name: '曲丽丽',
+    avatar: avatars2[0]
+  },
+  group: {
+    name: '高逼格设计天团',
+    link: 'http://github.com/'
+  },
+  project: {
+    name: '六月迭代',
+    link: 'http://github.com/'
+  },
+  template: '在 @{group} 新建项目 @{project}'
+}, {
+  id: 'trend-2',
+  updatedAt: new Date(),
+  user: {
+    name: '付小小',
+    avatar: avatars2[1]
+  },
+  group: {
+    name: '高逼格设计天团',
+    link: 'http://github.com/'
+  },
+  project: {
+    name: '六月迭代',
+    link: 'http://github.com/'
+  },
+  template: '在 @{group} 新建项目 @{project}'
+}, {
+  id: 'trend-3',
+  updatedAt: new Date(),
+  user: {
+    name: '林东东',
+    avatar: avatars2[2]
+  },
+  group: {
+    name: '中二少女团',
+    link: 'http://github.com/'
+  },
+  project: {
+    name: '六月迭代',
+    link: 'http://github.com/'
+  },
+  template: '在 @{group} 新建项目 @{project}'
+}, {
+  id: 'trend-4',
+  updatedAt: new Date(),
+  user: {
+    name: '周星星',
+    avatar: avatars2[4]
+  },
+  project: {
+    name: '5 月日常迭代',
+    link: 'http://github.com/'
+  },
+  template: '将 @{project} 更新至已发布状态'
+}, {
+  id: 'trend-5',
+  updatedAt: new Date(),
+  user: {
+    name: '朱偏右',
+    avatar: avatars2[3]
+  },
+  project: {
+    name: '工程效能',
+    link: 'http://github.com/'
+  },
+  comment: {
+    name: '留言',
+    link: 'http://github.com/'
+  },
+  template: '在 @{project} 发布了 @{comment}'
+}, {
+  id: 'trend-6',
+  updatedAt: new Date(),
+  user: {
+    name: '乐哥',
+    avatar: avatars2[5]
+  },
+  group: {
+    name: '程序员日常',
+    link: 'http://github.com/'
+  },
+  project: {
+    name: '品牌迭代',
+    link: 'http://github.com/'
+  },
+  template: '在 @{group} 新建项目 @{project}'
+}];
+function getFakeCaptcha(req, res) {
+  if (res && res.json) {
+    res.json('captcha-xxx');
+  } else {
+    return 'captcha-xxx';
+  }
+}
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+  getNotice: getNotice,
+  getActivities: getActivities,
+  getFakeList: getFakeList,
+  postFakeList: postFakeList,
+  getFakeCaptcha: getFakeCaptcha
+});
 
 /***/ }),
 
@@ -46303,23 +48187,22 @@ module.exports = __webpack_require__("zKeE").Symbol['for'];
 /* harmony export (immutable) */ __webpack_exports__["b"] = getProvince;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getCity;
 function getJson(infoType) {
-  const json = __webpack_require__("iUAZ")(`./${infoType}.json`); // eslint-disable-line
+  var json = __webpack_require__("iUAZ")("./".concat(infoType, ".json")); // eslint-disable-line
+
+
   return json;
 }
 
 function getProvince(req, res) {
   res.json(getJson('province'));
 }
-
 function getCity(req, res) {
   res.json(getJson('city')[req.params.province]);
 }
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({
-  getProvince,
-  getCity,
+  getProvince: getProvince,
+  getCity: getCity
 });
-
 
 /***/ }),
 
