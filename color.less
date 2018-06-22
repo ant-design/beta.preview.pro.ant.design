@@ -4195,12 +4195,8 @@ form .ant-upload {
   border-color: #e6d8d8;
   border-right-width: 1px !important;
 }
-.ant-input-number-disabled .ant-input-number-input {
-  background-color: #f5f5f5;
-}
 .ant-input-number-input {
-  color: rgba(0, 0, 0, 0.65);
-  background-color: #fff;
+  background-color: transparent;
   border: 0;
   border-radius: 4px;
 }
@@ -4213,17 +4209,9 @@ form .ant-upload {
 .ant-input-number-input::-webkit-input-placeholder {
   color: #bfbfbf;
 }
-.ant-input-number-input[disabled] {
-  background-color: #f5f5f5;
-  color: rgba(0, 0, 0, 0.25);
-}
-.ant-input-number-input[disabled]:hover {
-  border-color: #e6d8d8;
-  border-right-width: 1px !important;
-}
 .ant-input-number-handler-wrap {
   border-left: 1px solid #d9d9d9;
-  background: #fff;
+  background: transparent;
   border-radius: 0 4px 4px 0;
 }
 .ant-input-number-handler-down {
@@ -6017,6 +6005,13 @@ tr.ant-table-expanded-row:hover {
 .ant-table-small.ant-table-bordered .ant-table-thead > tr > th:last-child,
 .ant-table-small.ant-table-bordered .ant-table-tbody > tr > td:last-child {
   border-right: none;
+}
+.ant-table-small.ant-table-bordered .ant-table-fixed-left .ant-table-thead > tr > th:last-child,
+.ant-table-small.ant-table-bordered .ant-table-fixed-left .ant-table-tbody > tr > td:last-child {
+  border-right: 1px solid #e8e8e8;
+}
+.ant-table-small.ant-table-bordered .ant-table-fixed-right {
+  border-right: 1px solid #e8e8e8;
 }
 .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
   border: 1px solid #e8e8e8;

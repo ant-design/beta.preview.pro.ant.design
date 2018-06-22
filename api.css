@@ -5638,6 +5638,13 @@ tr.ant-table-expanded-row:hover {
 .ant-table-small.ant-table-bordered .ant-table-tbody > tr > td:last-child {
   border-right: none;
 }
+.ant-table-small.ant-table-bordered .ant-table-fixed-left .ant-table-thead > tr > th:last-child,
+.ant-table-small.ant-table-bordered .ant-table-fixed-left .ant-table-tbody > tr > td:last-child {
+  border-right: 1px solid #e8e8e8;
+}
+.ant-table-small.ant-table-bordered .ant-table-fixed-right {
+  border-right: 1px solid #e8e8e8;
+}
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
@@ -6488,7 +6495,6 @@ span.ant-radio + * {
   filter: blur(0.5px);
   /* autoprefixer: off */
   filter: progid\:DXImageTransform\.Microsoft\.Blur(PixelRadius\=1, MakeShadow\=false);
-  -webkit-transform: translateZ(0);
 }
 .ant-spin-blur:after {
   content: '';
